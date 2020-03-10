@@ -1,0 +1,85 @@
+﻿@model DisplayViewModel
+@using Microsoft.AspNetCore.Identity
+
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<body>
+
+    <div>
+        <h1>@Model.GetPending()</h1>
+        <h2>Pending</h2>
+        <table id="table12">
+            <tr>
+                <th>
+                    Incident Type
+                </th>
+                <th>
+                    PRN
+                </th>
+                <th>
+                    PRN medication
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Second Name
+                </th>
+                <th colspan="2">
+                    Subject Type
+                </th>
+
+            </tr>
+            @foreach (var line in Model.Reports)
+            {
+                if (line.UserId == UserManager.GetUserId(User) && line.Complete)
+                {
+
+                    <partial name="_ReportTable" model="line" />
+                }
+
+
+            }
+        </table>
+    </div>
+    <div>
+        <h2>Complete</h2>
+        <table id="table12">
+            <tr>
+                <th>
+                    Incident Type
+                </th>
+                <th>
+                    PRN
+                </th>
+                <th>
+                    PRN medication
+                </th>
+                <th>
+                    First Name
+                </th>
+                <th>
+                    Second Name
+                </th>
+                <th colspan="2">
+                    Subject Type
+                </th>
+
+            </tr>
+            @foreach (var line in Model.Reports)
+            {
+                if (line.UserId == UserManager.GetUserId(User) && !line.Complete)
+                {
+
+                    <partial name="_ReportTable" model="line" />
+
+                }
+
+
+            }
+        </table>
+    </div>
+
+
+</body>
