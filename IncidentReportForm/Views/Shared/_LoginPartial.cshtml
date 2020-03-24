@@ -4,26 +4,26 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-    <ul class="navbar-nav">
+    <ul>
         @if (SignInManager.IsSignedIn(User))
         {
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Create">Create</a>
+                <a class="nav-link" asp-area="" asp-controller="Report" asp-action="Create">Create</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Search">Search</a>
+                <a class="nav-link" asp-area="" asp-controller="Report" asp-action="Search">Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Display">Display</a>
+                <a class="nav-link" asp-area="" asp-controller="Report" asp-action="Display">Display</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="DisplayUser">Display()</a>
+                <a class="nav-link" asp-area="" asp-controller="Report" asp-action="DisplayUser">Display()</a>
             </li>
             <li class="nav-item">
-                <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                <a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
             <li class="nav-item">
-                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Checkout", "Report", new { area = "" })">
+                <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Create", "Report", new { area = "" })">
                     <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
                 </form>
             </li>

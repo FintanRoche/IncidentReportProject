@@ -24,7 +24,7 @@ namespace IncidentReportForm.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-        
+        public static List<String> ManagerEmails = new List<String>();
         public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
@@ -87,7 +87,7 @@ namespace IncidentReportForm.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.UserName, Email = Input.Email };
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
@@ -97,10 +97,12 @@ namespace IncidentReportForm.Areas.Identity.Pages.Account
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
                     //Set role
-                    if (input.Manager == 0)
-                    {
+                   if (input.Manager == 0)
+                   {
+                        ManagerEmails.Add(Input.Email);
                         IdentityUser currentUser = await _userManager.FindByNameAsync(user.UserName);
-                        var roleresult = _userManager.AddToRoleAsync(currentUser, "Manager");
+                        /*var roleresult =*/
+                        await _userManager.AddToRoleAsync(currentUser, "Manager");
                     }
 
 

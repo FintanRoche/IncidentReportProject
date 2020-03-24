@@ -10,6 +10,7 @@ namespace IncidentReportForm.Models
     {
         public string SubjectType { get; set; }
         [Key]
+        [Required]
         public String Pin { get; set; }
         public String FirstName { get; set; }
         public string LastName { set; get; }

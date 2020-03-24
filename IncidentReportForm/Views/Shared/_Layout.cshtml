@@ -14,33 +14,36 @@
 <body>
     <header>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bcolor border-bottom box-shadow mb-3 ">
-            <div class="container ">
-                <h4 class="text-white">IncidentReportForm</h4>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bcolor border-bottom box-shadow mb-3 ">*@
+            @*<div class="container ">*@
+                @*<h4 class="text-white">IncidentReportForm</h4>*@
+                @*<button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        @*<li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Checkout">Create</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Search">Search</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Display">Display</a>
-                        </li>*@
+                </button>*@
+                @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">*@
+                <ul>
+                    <li class="nav-item">
+                        <p class="nav-link" asp-area="" asp-controller="Report"> </p>
+                    </li>
+            @*<li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Checkout">Create</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Search">Search</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Display">Display</a>
+        </li>*@
 
-                            @if (User.IsInRole("Manager") == true)
-                            {
-                                <li class="nav-item">
-                                    <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                                </li>
-                            }
-                            <partial name="_LoginPartial" />
-                        </ul>
+            @if (User.IsInRole("Manager") == true)
+            {
+                <li class="nav-item">
+                    <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                </li>
+            }
+            <partial name="_LoginPartial" />
+        </ul>
                 </div>
             </div>
         </nav>

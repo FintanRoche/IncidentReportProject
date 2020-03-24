@@ -1,0 +1,49 @@
+﻿@model Reports
+
+    <body>
+        <div class="container1">
+            <form asp-action="Line" method="post" role="form">
+
+                <div class="form-group row">
+                    <label asp-for="LineManager.Notified" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <select>
+                            @foreach (string option in Options.ManagmentUnit)
+                            {
+                                <option asp-for="LineManager.Notified" value=@option>@option</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class=" form-group row">
+                    <label asp-for="LineManager.Responses" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="LineManager.Responses" class="form-control" />
+                    </div>
+                </div>
+
+                <div class=" form-group row">
+                    <label asp-for="LineManager.Comment" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="LineManager.Comment" class="form-control" />
+                    </div>
+                </div>
+
+
+
+
+                <input asp-for="ReportId" type="hidden" />
+                <div class="form-group row">
+                    <div class="col-md-offset-2 col-md-5">
+                        <input type="submit" class="btn btn-primary" value="Next" />
+                    </div>
+                </div>
+
+
+
+
+            </form>
+        </div>
+    </body>
+

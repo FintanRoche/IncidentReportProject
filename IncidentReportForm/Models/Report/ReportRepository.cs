@@ -16,10 +16,14 @@ namespace IncidentReportForm.Models
         SignInManager<IdentityUser> SignInManager;
         private readonly AppDbContext _appDbContext;
         
+        
         public ReportRepository(AppDbContext appDbContext)
         {
             _appDbContext = appDbContext;
         }
+
+        
+
         public void CreateReport(Reports order)
         {
 
@@ -30,6 +34,14 @@ namespace IncidentReportForm.Models
             _appDbContext.Reports.Add(order);
             _appDbContext.SaveChanges();
 
+        }
+        public void FinishReport(LineManager report)
+        {
+            Reports newReport =_appDbContext.Reports.FirstOrDefault(d=> d.ReportId==report.ReportId);
+            newReport.LineManager = report;
+            newReport.Complete = true;
+            _appDbContext.Update(newReport);
+            _appDbContext.SaveChanges();
         }
         public IEnumerable<Reports> Reports { get; set; }
       

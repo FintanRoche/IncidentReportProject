@@ -4,14 +4,16 @@ using IncidentReportForm.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IncidentReportForm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200316124935_LineManager")]
+    partial class LineManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -41,8 +43,8 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("Notified")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ReportId")
-                        .HasColumnType("int");
+                    b.Property<bool>("PRMP")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Responses")
                         .HasColumnType("nvarchar(max)");
@@ -57,9 +59,6 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("Pin")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(max)");
 
@@ -67,9 +66,6 @@ namespace IncidentReportForm.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SubjectType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("nextOfKin")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Pin");
@@ -84,6 +80,12 @@ namespace IncidentReportForm.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Abuse")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("CentreName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("Complete")
                         .HasColumnType("bit");
 
@@ -93,14 +95,22 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("ContributingFactors")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("CostCentre")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
-                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Frequency")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IncidentDescription")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IncidentLocation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IncidentRoom")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IncidentType")
@@ -112,38 +122,44 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("Manageabillity")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ManagementUnit")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ManagerEmail")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MedicalIntervention")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PresentFirstName")
+                    b.Property<bool>("PRNBool")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("PRN_Medication")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PresentLastName")
+                    b.Property<string>("PersonPresent")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PresentPhone")
-                        .HasColumnType("int");
 
                     b.Property<string>("PrincipalPin")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SecondaryPin")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Serverity")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ServiceType")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Solutions")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ThirdPin")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("time")
-                        .HasColumnType("datetime2");
 
                     b.HasKey("ReportId");
 
@@ -151,7 +167,49 @@ namespace IncidentReportForm.Migrations
 
                     b.HasIndex("PrincipalPin");
 
+                    b.HasIndex("SecondaryPin");
+
+                    b.HasIndex("ThirdPin");
+
                     b.ToTable("Reports");
+                });
+
+            modelBuilder.Entity("IncidentReportForm.Models.Secondary", b =>
+                {
+                    b.Property<string>("Pin")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Pin");
+
+                    b.ToTable("Secondary");
+                });
+
+            modelBuilder.Entity("IncidentReportForm.Models.Third", b =>
+                {
+                    b.Property<string>("Pin")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Pin");
+
+                    b.ToTable("Third");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -363,6 +421,14 @@ namespace IncidentReportForm.Migrations
                     b.HasOne("IncidentReportForm.Models.Principal", "Principal")
                         .WithMany()
                         .HasForeignKey("PrincipalPin");
+
+                    b.HasOne("IncidentReportForm.Models.Secondary", "Secondary")
+                        .WithMany()
+                        .HasForeignKey("SecondaryPin");
+
+                    b.HasOne("IncidentReportForm.Models.Third", "Third")
+                        .WithMany()
+                        .HasForeignKey("ThirdPin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

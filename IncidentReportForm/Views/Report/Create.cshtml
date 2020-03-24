@@ -1,186 +1,286 @@
 ﻿@model Reports
 
 <body>
-    <div class="container1">
-        <form asp-action="FormPage2" method="post" role="form">
-            <div class="form-group row">
-                <label asp-for="IncidentType" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <select asp-for="IncidentType">
-                        @foreach (string option in Options.IncidentType)
+    
+    <form asp-action="FormPage2" method="post" role="form">
+        <div class="container1">
+            <div><i>Injured Person Details</i></div><br />
+            <div id="indent">
+                <div class="form-group row">
+                    <label asp-for="Principal.FirstName" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="Principal.FirstName" class="form-control" />
+                    </div>
+                    <label asp-for="Principal.LastName" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="Principal.LastName" class="form-control" />
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label asp-for="Principal.DOB" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Principal.DOB" class="form-control" type="date" />
+                    </div>
+                </div>
+                
+                <div class="form-group row">
+                    <label asp-for="Principal.nextOfKin" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="Principal.nextOfKin" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="Principal.SubjectType" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <select class="form-control">
+                            @foreach (string option in Options.ManagmentUnit)
+                            {
+                                <option asp-for="Model.Principal.SubjectType" value=@option>@option</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container1">
+            <div><i>Incident Details</i></div><br />
+            <div id="indent">
+
+                <div class="form-group row">
+                    <label asp-for="date" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="date" class="form-control" type="date" />
+                    </div>
+                    <label asp-for="time" class="col-md-2 control-label"></label>
+                    <div class="col-3">
+                        <input asp-for="time" class="form-control" type="time" />
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="IncidentType" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="IncidentType" class="form-control" />
+                    </div>
+                    <label asp-for="IncidentLocation" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="IncidentLocation" class="form-control" />
+                    </div>
+                </div>
+                 <div class="form-group row">
+                    <label asp-for="Serverity" class="col-md-2 control-label"></label>
+                    <div class="rate">
+                        <input type="radio" asp-for="Serverity" id="star5" name="rate" value="5" />
+                        <label></label>
+                        <input type="radio" asp-for="Serverity" id="star4" name="rate" value="4" />
+                        <label></label>
+                        <input type="radio" asp-for="Serverity" id="star3" name="rate" value="3" />
+                        <label></label>
+                        <input type="radio" asp-for="Serverity" id="star2" name="rate" value="2" />
+                        <label></label>
+                        <input type="radio" asp-for="Serverity" id="star1" name="rate" value="1" />
+                        <label></label>
+                      </div>
+                 </div>    
+                <div class="form-group row">
+                     <label asp-for="MedicalIntervention" class="col-md-2 control-label"></label>
+                     <div class="col-md-3">
+                         <label>yes</label>
+                         <input type="radio" asp-for="MedicalIntervention" value="true" />
+                         <label>no</label>
+                         <input type="radio" asp-for="MedicalIntervention" value="false" />
+                     </div>
+                </div>
+                <div class="form-group row">
+                    <label asp-for="IncidentDescription" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                    <textarea asp-for="IncidentDescription" rows="4" cols="40" class="control-label" ></textarea>        
+                    </div>
+                </div>
+        </div>
+                @*<div class="container1">
+                    <div class="form-group row">
+                        <label asp-for="IncidentType" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <select asp-for="IncidentType">
+                                @foreach (string option in Options.IncidentType)
+                                {
+                                    <option type="radio" value=@option>@option</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="PRNBool" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <input type="radio" asp-for="PRNBool" value="true" /> yes
+                            <input type="radio" asp-for="PRNBool" value="false" /> no
+                        </div>
+                    </div>
+
+                    <div class=" form-group row" class="container1">
+                        <label asp-for="PRN_Medication" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <input asp-for="PRN_Medication" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="Principal.SubjectType" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            @foreach (string option in Options.SubjectType)
+                            {
+                                <input type="radio" asp-for="Principal.SubjectType" value=option /> @option
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="container1">
+                    <div class=" form-group row">
+                        <label asp-for="Principal.Pin" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <input asp-for="Principal.Pin" class="form-control" type="number" required />
+                        </div>
+                    </div>
+
+                    <div class=" form-group row">
+                        <label asp-for="Principal.LastName" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <input asp-for="Principal.LastName" class="form-control" />
+                        </div>
+                    </div>*@
+
+                @*<div class=" form-group row">
+                        <label asp-for="Principal.FirstName" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <input asp-for="Principal.FirstName" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="ManagementUnit" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <select>
+                                @foreach (string option in Options.ManagmentUnit)
+                                {
+                                    <option asp-for="Model.ManagementUnit" value=@option>@option</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label asp-for="CentreName" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <select asp-for="CentreName">
+                                @foreach (string option in Options.CentreName)
+                                {
+                                    <option value=@option>@option</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label asp-for="CostCentre" class="col-md-2 control-label"></label>
+                        <div class="col-md-5">
+                            <select asp-for="CostCentre">
+                                @foreach (string option in Options.CostCentre)
+                                {
+                                    <option value=@option>@option</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="form-group row">
+                    <label asp-for="ServiceType" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <select asp-for="CostCentre">
+                            @foreach (string option in Options.ServiceType)
+                            {
+                                <option asp-for="ServiceType" value=@option>@option</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group row">
+                    <label asp-for="Secondary.SubjectType" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        @foreach (string option in Options.SubjectType)
                         {
-                            <option type="radio" value=@option>@option</option>
+                            <input type="radio" asp-for="Secondary.SubjectType" value=@option /> @option
                         }
-                    </select>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="PRNBool" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input type="radio" asp-for="PRNBool" value="true" /> yes
-                    <input type="radio" asp-for="PRNBool" value="false" /> no
-                </div>
-            </div>
-            <div class=" form-group row">
-                <label asp-for="PRN_Medication" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="PRN_Medication" class="form-control" />
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label asp-for="Principal.SubjectType" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    @foreach (string option in Options.SubjectType)
-                    {
-                        <input type="radio" asp-for="Principal.SubjectType" value=option /> @option
-                    }
+                <div class=" form-group row">
+                    <label asp-for="Secondary.Pin" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Secondary.Pin" class="form-control" type="number" required />
+                    </div>
                 </div>
-            </div>
 
-            <div class=" form-group row">
-                <label asp-for="Principal.Pin" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Principal.Pin" class="form-control" />
+                <div class=" form-group row">
+                    <label asp-for="Secondary.LastName" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Secondary.LastName" class="form-control" />
+                    </div>
                 </div>
-            </div>
 
-            <div class=" form-group row">
-                <label asp-for="Principal.LastName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Principal.LastName" class="form-control" />
+                <div class=" form-group row">
+                    <label asp-for="Secondary.FirstName" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Secondary.FirstName" class="form-control" />
+                    </div>
                 </div>
-            </div>
 
-            <div class=" form-group row">
-                <label asp-for="Principal.FirstName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Principal.FirstName" class="form-control" />
-                </div>
-            </div>
 
-            <div class="form-group row">
-                <label asp-for="ManagementUnit" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <select>
-                        @foreach (string option in Options.ManagmentUnit)
+                <div class="form-group row">
+                    <label asp-for="Third.SubjectType" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        @foreach (string option in Options.SubjectType)
                         {
-                            <option asp-for="Model.ManagementUnit" value=@option>@option</option>
+                            <input type="radio" asp-for="Third.SubjectType" value=@option /> @option
                         }
-                    </select>
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label asp-for="CentreName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <select asp-for="CentreName">
-                        @foreach (string option in Options.CentreName)
-                        {
-                            <option value=@option>@option</option>
-                        }
-                    </select>
+                <div class=" form-group row">
+                    <label asp-for="Third.Pin" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Third.Pin" class="form-control" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <label asp-for="CostCentre" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <select asp-for="CostCentre">
-                        @foreach (string option in Options.CostCentre)
-                        {
-                            <option value=@option>@option</option>
-                        }
-                    </select>
+
+                <div class=" form-group row">
+                    <label asp-for="Third.LastName" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Third.LastName" class="form-control" />
+                    </div>
                 </div>
-            </div>
 
-            <div class="form-group row">
-                <label asp-for="ServiceType" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <select asp-for="CostCentre">
-                        @foreach (string option in Options.ServiceType)
-                        {
-                            <option asp-for="ServiceType" value=@option>@option</option>
-                        }
-                    </select>
+                <div class=" form-group row">
+                    <label asp-for="Third.FirstName" class="col-md-2 control-label"></label>
+                    <div class="col-md-5">
+                        <input asp-for="Third.FirstName" class="form-control" />
+                    </div>
+                </div>*@
+
+
+
+                <div class="form-group row">
+                    <div class="col-md-offset-2 col-md-5">
+                        <input type="submit" class="btn btn-primary" value="Next" />
+                    </div>
                 </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label asp-for="Secondary.SubjectType" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    @foreach (string option in Options.SubjectType)
-                    {
-                        <input type="radio" asp-for="Secondary.SubjectType" value=@option /> @option
-                    }
-                </div>
-            </div>
-
-            <div class=" form-group row">
-                <label asp-for="Secondary.Pin" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Secondary.Pin" class="form-control" type="number" required/>
-                </div>
-            </div>
-
-            <div class=" form-group row">
-                <label asp-for="Secondary.LastName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Secondary.LastName" class="form-control" />
-                </div>
-            </div>
-
-            <div class=" form-group row">
-                <label asp-for="Secondary.FirstName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Secondary.FirstName" class="form-control" />
-                </div>
-            </div>
-
-
-            <div class="form-group row">
-                <label asp-for="Third.SubjectType" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    @foreach (string option in Options.SubjectType)
-                    {
-                        <input type="radio" asp-for="Third.SubjectType" value=@option /> @option
-                    }
-                </div>
-            </div>
-
-            <div class=" form-group row">
-                <label asp-for="Third.Pin" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Third.Pin" class="form-control" />
-                </div>
-            </div>
-
-            <div class=" form-group row">
-                <label asp-for="Third.LastName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Third.LastName" class="form-control" />
-                </div>
-            </div>
-
-            <div class=" form-group row">
-                <label asp-for="Third.FirstName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Third.FirstName" class="form-control" />
-                </div>
-            </div>
-
-            
-
-            <div class="form-group row">
-                <div class="col-md-offset-2 col-md-5">
-                    <input type="submit" class="btn btn-primary" value="Next" />
-                </div>
-            </div>
 
 
 
 
-        </form>
+    </form>
     </div>
 </body>

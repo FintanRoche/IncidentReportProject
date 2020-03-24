@@ -10,6 +10,7 @@ namespace IncidentReportForm.Models
         IEnumerable<Reports> AllReports { get; }
 
         void CreateReport(Reports report);
+        public void FinishReport(LineManager report);
         Reports GetReportById(int reportId);
     }
 }
