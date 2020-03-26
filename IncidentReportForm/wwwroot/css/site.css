@@ -3,27 +3,30 @@ for details on configuring this project to bundle and minify static web assets. 
 ul {
   list-style-type: none;
   margin: 0px;
-  padding: 5px;
+  padding: 0px;
   overflow: hidden;
   /*border: 1px solid #e7e7e7;*/
-  background-color: black;
+  background-color: darkblue;
 }
 
 li {
   float: left;
-  padding-left: 3%;
+  border: white;
+  
 }
 
 li a {
   display: block;
   color: white;
+  
   text-align: center;
   /*padding: 14px 16px;*/
-  text-decoration: none;
+  text-decoration: double;
 }
 
 li a:hover:not(.active) {
-  background-color: #ddd;
+  background-color: #2f2f2f;
+  color: lightgrey;
 }
 
 li a.active {
@@ -112,6 +115,22 @@ body {
     /*background-color: whitesmoke;*/
     background-color: white;
 }
+.container2 {
+    width: 90%;
+    
+    border-bottom: 1px solid lightgrey;
+    margin: 40px auto;
+    padding: 20px;
+    /*background-color: whitesmoke;*/
+    background-color: white;
+}
+.container3 {
+    width: 90%;
+    border: 1px solid lightgrey;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: white;
+}
 .con {
     width: 50%;
     margin: 0 auto;
@@ -132,6 +151,7 @@ body {
     padding-bottom:20px;
     background-color: white;
 }
+
 #table12 {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     border-collapse: collapse;
@@ -156,8 +176,8 @@ body {
     #table12 th {
         padding-top: 12px;
         padding-bottom: 12px;
-        text-align: left;
-        background-color: darkgrey;
+        text-align: center;
+        background-color: #2d2b5e;
         color: white;
     }
     #indent{

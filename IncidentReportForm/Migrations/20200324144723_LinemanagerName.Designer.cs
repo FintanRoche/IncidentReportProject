@@ -4,14 +4,16 @@ using IncidentReportForm.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IncidentReportForm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200324144723_LinemanagerName")]
+    partial class LinemanagerName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,10 +62,8 @@ namespace IncidentReportForm.Migrations
 
             modelBuilder.Entity("IncidentReportForm.Models.Principal", b =>
                 {
-                    b.Property<int>("PrincipalId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Pin")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
@@ -80,7 +80,7 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("nextOfKin")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("PrincipalId");
+                    b.HasKey("Pin");
 
                     b.ToTable("Principal");
                 });
@@ -129,8 +129,8 @@ namespace IncidentReportForm.Migrations
                     b.Property<int>("PresentPhone")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PrincipalId")
-                        .HasColumnType("int");
+                    b.Property<string>("PrincipalPin")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Serverity")
                         .HasColumnType("nvarchar(max)");
@@ -148,7 +148,7 @@ namespace IncidentReportForm.Migrations
 
                     b.HasIndex("LineManagerId");
 
-                    b.HasIndex("PrincipalId");
+                    b.HasIndex("PrincipalPin");
 
                     b.ToTable("Reports");
                 });
@@ -361,7 +361,7 @@ namespace IncidentReportForm.Migrations
 
                     b.HasOne("IncidentReportForm.Models.Principal", "Principal")
                         .WithMany()
-                        .HasForeignKey("PrincipalId");
+                        .HasForeignKey("PrincipalPin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

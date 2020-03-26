@@ -10,9 +10,7 @@ namespace IncidentReportForm.Models
     public class Principal : ISubject
     {
         public string SubjectType { get; set; }
-        [Key]
-        [Required]
-        public string Pin { get; set; }
+        public  int PrincipalId { get; set; }
         //[Remote(action: "EmailValidator", controller: "Report")]
         public string FirstName { get; set; }
         public string LastName { get; set; }

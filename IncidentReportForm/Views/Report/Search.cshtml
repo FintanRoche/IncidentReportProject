@@ -1,19 +1,46 @@
-﻿@model Reports
+﻿@model Search
 <body>
     <div class="container1">
         <form asp-action="SearchResults" method="post" role="form">
 
             @*<div class=" form-group row">
-                <label asp-for="PRN_Medication" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="PRN_Medication" class="form-control" />
-                </div>
-            </div>*@
+            <label asp-for="PRN_Medication" class="col-md-2 control-label"></label>
+            <div class="col-md-5">
+                <input asp-for="PRN_Medication" class="form-control" />
+            </div>
+        </div>*@
 
             <div class=" form-group row">
-                <label asp-for="Principal.FirstName" class="col-md-2 control-label"></label>
-                <div class="col-md-5">
-                    <input asp-for="Principal.FirstName" class="form-control" />
+                <label asp-for="FirstName" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="FirstName" class="form-control" />
+                </div>
+                <label asp-for="LastName" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="LastName" class="form-control" />
+                </div>
+            </div>
+            <div class=" form-group row">
+                <label asp-for="StartTime" class="col-md-2 control-label"></label>
+                <div class="col-md-2">
+                    <input asp-for="StartTime" class="form-control" type="date" />
+                </div>
+                <label class="col-md-1">-</label>
+                <div class="col-md-2">
+                    <input asp-for="EndTime" class="form-control" type="date" />
+                </div>
+
+            </div>
+            <div class=" form-group row">
+                <label asp-for="Type" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="Type" class="form-control" />
+                </div>
+            </div>
+            <div class=" form-group row">
+                <label asp-for="Location" class="col-md-2 control-label"></label>
+                <div class="col-md-3">
+                    <input asp-for="Location" class="form-control" />
                 </div>
             </div>
 

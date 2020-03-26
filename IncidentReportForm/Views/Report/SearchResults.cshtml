@@ -3,30 +3,46 @@
     <table id="table12">
         <tr>
             <th>
-                Incident Type
-            </th>
-            <th>
-                PRN
-            </th>
-            <th>
-                PRN medication
+                Last Name
             </th>
             <th>
                 First Name
             </th>
             <th>
-                Second Name
+                Next Of Kin
             </th>
-            <th colspan="2">
-                Subject Type
+            <th>
+                Incident Type
             </th>
+            <th>
+                Date
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
 
+            </th>
         </tr>
 
         @foreach (var line in Model.Reports)
         {
-            @*@if ((line.PRN_Medication == Model.search && line.PRN_Medication != null) || (line.Principal.FirstName== Model.firstName && line.Principal.FirstName!= null  ))
+        @if (((line.Principal.FirstName == Model.Search.FirstName || Model.Search.FirstName == null)) && ((line.Principal.LastName == Model.Search.LastName || Model.Search.LastName == null)))
             {
-                <partial name="_ReportTable" model="line" />
-            }*@}
-        </table>
+                if ( line.date<=Model.Search.EndTime && line.date>=Model.Search.StartTime||Model.Search.EndTime.ToString("MM/dd/yyyy")==Model.NullTime.ToString("MM/dd/yyyy"))
+                {
+                    if(((line.IncidentType == Model.Search.Type || Model.Search.Type == null)) && ((line.IncidentLocation == Model.Search.Location || Model.Search.Location == null)))
+                    {
+
+
+                    <tr>
+                        <partial name="_ReportTable" model="line" />
+                        <td>
+                            <a asp-controller="Report"
+                            asp-action="FinalReport"
+                            asp-route-reportId="@line.ReportId"> more 
+                            </a>
+                        </td>
+                    </tr>
+         }  }   }   }
+    </table>

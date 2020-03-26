@@ -13,6 +13,8 @@ namespace IncidentReportForm.Models
     {
         [Key]
         public int LineManagerId { get; set;}
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Notified { get; set; }
         public string Responses { get; set; }
         public string Comment { get; set; }

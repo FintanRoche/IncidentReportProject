@@ -40,6 +40,8 @@ namespace IncidentReportForm.Controllers
 
             return View(displayViewModel);
         }
+        
+       
 
         public IActionResult Create()
         {
@@ -71,29 +73,28 @@ namespace IncidentReportForm.Controllers
         }
 
         [HttpPost]
-        public IActionResult SearchResults(Reports report)
+        public IActionResult SearchResults(Search report)
         {
-            //if (!String.IsNullOrEmpty(report.PRN_Medication)|| !String.IsNullOrEmpty(report.Principal.FirstName))
-            //{
-            //    var displayViewModel = new DisplayViewModel
-            //    {
-            //        Reports = _reportRepository.AllReports,
-            //        search = report.PRN_Medication,
-            //        firstName = report.Principal.FirstName
-            //    };
-            //    return View(displayViewModel);
-            //}
+            if (report!=null)
+            {
+                var displayViewModel = new DisplayViewModel
+                {
+                    Reports = _reportRepository.AllReports,
+                    Search = report
+            };
+            return View(displayViewModel);
+        }
 
             return View("Search");
-        }
+    }
 
 
-        [HttpPost]
-        public IActionResult Create(Reports report)
-        {
-            _reportRepository.CreateReport(report);
-            return View(report);
-        }
+        //[HttpPost]
+        //public IActionResult Create(Reports report)
+        //{
+        //    _reportRepository.CreateReport(report);
+        //    return View(report);
+        //}
 
         public IActionResult Details(int reportid)
         {
@@ -114,7 +115,7 @@ namespace IncidentReportForm.Controllers
                 return NotFound();
             }
 
-            return View(report.LineManager);
+            return View(report);
         }
         public IActionResult Line(LineManager report)
         {
@@ -155,51 +156,66 @@ namespace IncidentReportForm.Controllers
             return View();
         }
 
+        public IActionResult FinalReport(int reportid)
+        {
+            Reports report = _reportRepository.GetReportById(reportid);
+            var displayVeiwModel = new DisplayViewModel {
+                    Report = report,
+                    Principal = report.Principal
+            };
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            return View(report);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Submit(Reports report)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("FormPage2");
-            //}
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            if (ModelState.IsValid)
+            {
+                RedirectToAction("Submit");
+            }
 
-            //else
-            //{
-                report.UserId = _userManager.GetUserId(User);
-                _reportRepository.CreateReport(report);
-                try
-                {
-                    var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress("TeastA", report.Email));
-                    message.To.Add(new MailboxAddress("TestB", report.Email));
-                    message.Subject = "Incident Report";
-                    message.Body = new TextPart("plain")
-                    {
-                        Text = Email.getEmail(report)
-                    };
+            return View();
+            //report.UserId = _userManager.GetUserId(User);
+            //    _reportRepository.CreateReport(report);
+            //    try
+            //    {
+            //        var message = new MimeMessage();
+            //        message.From.Add(new MailboxAddress("TeastA", report.Email));
+            //        message.To.Add(new MailboxAddress("TestB", report.Email));
+            //        message.Subject = "Incident Report";
+            //        message.Body = new TextPart("plain")
+            //        {
+            //            Text = Email.getEmail(report)
+            //        };
 
-                    using (var client = new MailKit.Net.Smtp.SmtpClient())
-                    {
+            //        using (var client = new MailKit.Net.Smtp.SmtpClient())
+            //        {
 
-                        client.Connect("smtp.gmail.com", 587, false);
+            //            client.Connect("smtp.gmail.com", 587, false);
 
-                        //SMTP server authentication if needed
-                        client.Authenticate("fintanroche1@gmail.com", "@Time123");
+            //            //SMTP server authentication if needed
+            //            client.Authenticate("fintanroche1@gmail.com", "@Time123");
 
-                        client.Send(message);
+            //            client.Send(message);
 
-                        client.Disconnect(true);
-                    }
+            //            client.Disconnect(true);
+            //        }
 
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine(ex.Message);
-                    return StatusCode(500, "No Error occured");
-                }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        Console.WriteLine(ex.Message);
+            //        return StatusCode(500, "No Error occured");
+            //    }
 
-                return View("Submit");
+           // return View();
             }
             //}
             

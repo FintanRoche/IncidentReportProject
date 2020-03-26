@@ -42,8 +42,9 @@ namespace IncidentReportForm.Models
         //public string Solutions { get; set; }
         public string ManagerEmail { get; set; }
         //public Options Options { get; set; }
-        [Required]
-       [EmailVAlidation]
+        [Required(ErrorMessage = "Please choose admission date.")]
+        [Display(Name = "Email :")]
+        [EmailVAlidation(ErrorMessage ="Invalid Email")]
         public string Email { get; set; }
         public string UserId { get; set; }
         public bool Complete { get; set; }

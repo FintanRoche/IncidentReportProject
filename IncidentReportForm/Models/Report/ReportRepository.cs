@@ -54,7 +54,8 @@ namespace IncidentReportForm.Models
         }
         public Reports GetReportById(int reportId)
         {
-            return _appDbContext.Reports.FirstOrDefault(r => r.ReportId == reportId);
+            Reports report=_appDbContext.Reports.Include(p=>p.Principal).Include(c=>c.LineManager).FirstOrDefault(r => r.ReportId == reportId);
+            return report;
         }
         public int GetPending()
         {

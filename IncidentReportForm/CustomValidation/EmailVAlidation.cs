@@ -12,24 +12,16 @@ namespace IncidentReportForm.CustomValidation
 {
     public class EmailVAlidation : ValidationAttribute
     {
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
+        public override bool IsValid(object value)
         {
-            //using (var context = new BloggingContext())
-            //{
-            //    var blogs = context.Blogs.ToList();
+            String email = Convert.ToString(value);
+            //var report = (Reports)validationContext.ObjectInstance;
+            //if (email == "fintanroche1@gmail.com")
+            //    {
+               
+            //        return true;
             //}
-            var report = (Reports)validationContext.ObjectInstance;
-            
-            bool correct = false;
-           // foreach (String email in RegisterModel.ManagerEmails)
-           // {
-                if (report.Email == "fintanroche1@gmail.com")
-                {
-                    correct = true;
-                }
-            //
-
-            return (correct == true) ? ValidationResult.Success : new ValidationResult("asfljh");
+            return true;
         }
     }
 }

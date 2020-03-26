@@ -3,31 +3,39 @@
     <table id="table12">
         <tr>
             <th>
-                Incident Type
-            </th>
-            <th>
-                PRN
-            </th>
-            <th>
-                PRN medication
+                Last Name
             </th>
             <th>
                 First Name
             </th>
             <th>
-                Second Name
+                Next Of Kin
             </th>
-            <th colspan="2">
-                Subject Type
+            <th>
+                Incident Type
             </th>
-            
+            <th>
+                Date
+            </th>
+            <th>
+                Time
+            </th>
+            <th>
+
+            </th>
         </tr>
-        
+
         @foreach (var line in Model.Reports)
         {
-            
+            <tr>
                 <partial name="_ReportTable" model="line" />
-            
+                <td>
+                    <a asp-controller="Report"
+                       asp-action="FinalReport"
+                       asp-route-reportId="@line.ReportId"> more 
+                    </a>
+                </td>
+            </tr>
         }
     </table>
 </body>

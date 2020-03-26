@@ -16,8 +16,12 @@ namespace IncidentReportForm.Models
         //public ReportRepository reportRepository { get; set; }
         public ClaimsPrincipal User { get; set; }
         public IEnumerable<Reports> Reports { get; set; }
-        public string search {get; set;}
+        public Search Search {get; set;}
         public string firstName { get; set; }
+        public readonly DateTime NullTime = new DateTime(0001, 1, 1, 0, 0, 0, 0);
+        public DateTime EndTime { get; set; }
+        public Reports Report { get; set; }
+        public Principal Principal { get; set; }
         public int GetPending()
         {
             int numPending = 0;
