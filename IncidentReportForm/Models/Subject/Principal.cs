@@ -11,7 +11,7 @@ namespace IncidentReportForm.Models
     {
         public string SubjectType { get; set; }
         public  int PrincipalId { get; set; }
-        //[Remote(action: "EmailValidator", controller: "Report")]
+       
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime DOB { get; set; }

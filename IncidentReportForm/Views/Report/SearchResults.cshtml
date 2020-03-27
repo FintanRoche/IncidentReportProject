@@ -29,7 +29,7 @@
         {
         @if (((line.Principal.FirstName == Model.Search.FirstName || Model.Search.FirstName == null)) && ((line.Principal.LastName == Model.Search.LastName || Model.Search.LastName == null)))
             {
-                if ( line.date<=Model.Search.EndTime && line.date>=Model.Search.StartTime||Model.Search.EndTime.ToString("MM/dd/yyyy")==Model.NullTime.ToString("MM/dd/yyyy"))
+                if ( line.Date<=Model.Search.EndTime && line.Date>=Model.Search.StartTime||Model.Search.EndTime.ToString("MM/dd/yyyy")==Model.NullTime.ToString("MM/dd/yyyy"))
                 {
                     if(((line.IncidentType == Model.Search.Type || Model.Search.Type == null)) && ((line.IncidentLocation == Model.Search.Location || Model.Search.Location == null)))
                     {

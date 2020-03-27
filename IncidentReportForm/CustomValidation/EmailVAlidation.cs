@@ -1,6 +1,7 @@
 ﻿using IncidentReportForm.Areas.Identity.Pages.Account;
-
+using IncidentReportForm.Controllers;
 using IncidentReportForm.Models;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,16 +13,21 @@ namespace IncidentReportForm.CustomValidation
 {
     public class EmailVAlidation : ValidationAttribute
     {
+        public static UserManager<IdentityUser> userManager { set; get; }
         public override bool IsValid(object value)
         {
-            String email = Convert.ToString(value);
-            //var report = (Reports)validationContext.ObjectInstance;
-            //if (email == "fintanroche1@gmail.com")
-            //    {
-               
-            //        return true;
-            //}
-            return true;
+
+            foreach (IdentityUser user in userManager.Users)
+            {
+                String email = Convert.ToString(value);
+                if (email == user.Email)
+                {
+
+                    return true;
+                }
+            }
+            return false;
+            
         }
     }
 }

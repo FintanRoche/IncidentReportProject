@@ -15,6 +15,7 @@ namespace IncidentReportForm.Models
     {
         [Key]
         public int ReportId { get; set; }
+        [Required(ErrorMessage = "Please choose an Icident type.")]
         public string IncidentType { get; set; }
         // public IEnumerable<SelectListItem> IncidentTypes { get; set; }
         //public bool PRNBool { get; set; }
@@ -49,9 +50,10 @@ namespace IncidentReportForm.Models
         public string UserId { get; set; }
         public bool Complete { get; set; }
         public LineManager LineManager { get; set; }
-        
-        public DateTime date { get; set; }
-        public DateTime time { get; set; }
+        [Display(Name="Date :")]
+        [DateValidation(ErrorMessage="Date can not be after todays date.")]
+        public DateTime Date { get; set; }
+        public DateTime Time { get; set; }
         // public DateTime OrderPlaced { get; set; }
     }
 }

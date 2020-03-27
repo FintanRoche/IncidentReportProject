@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using IncidentReportForm.CustomValidation;
 using IncidentReportForm.Models;
 using IncidentReportForm.Models;
 //using IncidentReportForm.ViewModels;
@@ -26,7 +27,9 @@ namespace IncidentReportForm.Controllers
         {
             _userManager = userManager;
             _reportRepository = reportRepository;
+            EmailVAlidation.userManager = userManager;
         }
+      
         public IActionResult DisplayUser()
         {
             var displayViewModel = new DisplayViewModel
@@ -176,48 +179,48 @@ namespace IncidentReportForm.Controllers
         public IActionResult Submit(Reports report)
         {
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                RedirectToAction("Submit");
+                return View("Create");
+            }
+            else
+            {
+            report.UserId = _userManager.GetUserId(User);
+            _reportRepository.CreateReport(report);
+            try
+            {
+                var message = new MimeMessage();
+                message.From.Add(new MailboxAddress("TeastA", report.Email));
+                message.To.Add(new MailboxAddress("TestB", report.Email));
+                message.Subject = "Incident Report";
+                message.Body = new TextPart("plain")
+                {
+                    Text = Email.getEmail(report)
+                };
+
+                using (var client = new MailKit.Net.Smtp.SmtpClient())
+                {
+
+                    client.Connect("smtp.gmail.com", 587, false);
+
+                    //SMTP server authentication if needed
+                    client.Authenticate("fintanroche1@gmail.com", "@Time123");
+
+                    client.Send(message);
+
+                    client.Disconnect(true);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return StatusCode(500, "No Error occured");
             }
 
             return View();
-            //report.UserId = _userManager.GetUserId(User);
-            //    _reportRepository.CreateReport(report);
-            //    try
-            //    {
-            //        var message = new MimeMessage();
-            //        message.From.Add(new MailboxAddress("TeastA", report.Email));
-            //        message.To.Add(new MailboxAddress("TestB", report.Email));
-            //        message.Subject = "Incident Report";
-            //        message.Body = new TextPart("plain")
-            //        {
-            //            Text = Email.getEmail(report)
-            //        };
-
-            //        using (var client = new MailKit.Net.Smtp.SmtpClient())
-            //        {
-
-            //            client.Connect("smtp.gmail.com", 587, false);
-
-            //            //SMTP server authentication if needed
-            //            client.Authenticate("fintanroche1@gmail.com", "@Time123");
-
-            //            client.Send(message);
-
-            //            client.Disconnect(true);
-            //        }
-
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        Console.WriteLine(ex.Message);
-            //        return StatusCode(500, "No Error occured");
-            //    }
-
-           // return View();
             }
-            //}
+        }
             
         }
 

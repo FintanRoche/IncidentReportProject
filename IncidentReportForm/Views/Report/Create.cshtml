@@ -5,7 +5,7 @@
 <body>
 
     <form asp-action="Submit" method="post" role="form">
-        @*<div class="container1">
+        <div class="container1">
             <div><i>Injured Person Details</i></div><br />
             <div id="indent">
                 <div class="form-group row">
@@ -38,8 +38,9 @@
                         <select class="form-control">
                             @foreach (string option in Options.ManagmentUnit)
                             {
-                            <option asp-for="Model.Principal.SubjectType" value=@option>@option</option>
+                                <option asp-for="Model.Principal.SubjectType" value=@option>@option</option>
                             }
+                            
                         </select>
                     </div>
                 </div>
@@ -52,23 +53,27 @@
             <div id="indent">
 
                 <div class="form-group row">
-                    <label asp-for="date" class="col-md-2 control-label"></label>
+                    <label asp-for="Date" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
-                        <input asp-for="date" class="form-control" type="date" />
+                        <input asp-for="Date" class="form-control" type="date" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
                     </div>
-                    <label asp-for="time" class="col-md-2 control-label"></label>
+                    <label asp-for="Time" class="col-md-2 control-label"></label>
                     <div class="col-3">
-                        <input asp-for="time" class="form-control" type="time" />
+                        <input asp-for="Time" class="form-control" type="time" />
+                        <span asp-validation-for="Time" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label asp-for="IncidentType" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
                         <input asp-for="IncidentType" class="form-control" />
+                        <span asp-validation-for="IncidentType" class="text-danger"></span>
                     </div>
                     <label asp-for="IncidentLocation" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
                         <input asp-for="IncidentLocation" class="form-control" />
+                        <span asp-validation-for="IncidentLocation" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -93,12 +98,14 @@
                         <input type="radio" asp-for="MedicalIntervention" value="true" />
                         <label>no</label>
                         <input type="radio" asp-for="MedicalIntervention" value="false" />
+                        <span asp-validation-for="MedicalIntervention" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="form-group row">
                     <label asp-for="IncidentDescription" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
                         <textarea asp-for="IncidentDescription" rows="4" cols="40" class="control-label"></textarea>
+                        <span asp-validation-for="IncidentDescription" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -113,22 +120,26 @@
                 <label asp-for="PresentFirstName" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
                     <input asp-for="PresentFirstName" class="form-control" />
+                    <span asp-validation-for="PresentFirstName" class="text-danger"></span>
                 </div>
                 <label asp-for="PresentLastName" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
                     <input asp-for="PresentLastName" class="form-control" />
+                    <span asp-validation-for="PresentLastName" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="PresentPhone" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
-                    <input asp-for="PresentPhone" class="form-control" tupe="text" />
+                    <input asp-for="PresentPhone" class="form-control" type="text" />
+                    <span asp-validation-for="PresentPhone" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
                 <label asp-for="IncidentDescription" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
                     <textarea asp-for="IncidentDescription" rows="4" cols="40" class="control-label"></textarea>
+                    <span asp-validation-for="IncidentDescription" class="text-danger"></span>
                 </div>
             </div>
 
@@ -142,12 +153,14 @@
                 <label asp-for="LineManager.FirstName" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
                     <input asp-for="LineManager.FirstName" class="form-control" />
+                    <span asp-validation-for="LineManager.FirstName" class="text-danger"></span>
                 </div>
                 <label asp-for="LineManager.LastName" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
                     <input asp-for="LineManager.LastName" class="form-control" />
+                    <span asp-validation-for="LineManager.LastName" class="text-danger"></span>
                 </div>
-            </div>*@
+            </div>
             <div class=" form-group row">
                 <label asp-for="Email" class="col-md-2 control-label"></label>
                 <div class="col-md-3">

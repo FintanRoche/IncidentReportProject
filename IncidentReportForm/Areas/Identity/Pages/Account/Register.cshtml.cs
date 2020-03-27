@@ -25,7 +25,11 @@ namespace IncidentReportForm.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         public static List<String> ManagerEmails = new List<String>();
-        public RegisterModel(
+
+
+
+
+public RegisterModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
