@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using IncidentReportForm.CustomValidation;
@@ -8,26 +9,32 @@ using IncidentReportForm.Models;
 using IncidentReportForm.Models;
 //using IncidentReportForm.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MimeKit;
+using Syncfusion.HtmlConverter;
+using Syncfusion.Pdf;
 
 namespace IncidentReportForm.Controllers
 {
-    [Authorize]
+    
     public class ReportController : Controller
 
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<ReportController> _logger;
+        private readonly IWebHostEnvironment _hostingEnviroment;
 
         private readonly IReportRepository _reportRepository;
-        public ReportController(IReportRepository reportRepository, UserManager<IdentityUser> userManager)
+        public ReportController(IReportRepository reportRepository, UserManager<IdentityUser> userManager, IWebHostEnvironment hostingEnviroment)
         {
             _userManager = userManager;
             _reportRepository = reportRepository;
-            EmailVAlidation.userManager = userManager;
+            _hostingEnviroment = hostingEnviroment;
+
+        EmailVAlidation.userManager = userManager;
         }
       
         public IActionResult DisplayUser()
@@ -43,9 +50,9 @@ namespace IncidentReportForm.Controllers
 
             return View(displayViewModel);
         }
-        
-       
 
+
+        
         public IActionResult Create()
         {
 
@@ -67,14 +74,14 @@ namespace IncidentReportForm.Controllers
             return View(displayViewModel);
 
         }
-
+       
         public IActionResult Search()
         {
 
 
             return View();
         }
-
+       
         [HttpPost]
         public IActionResult SearchResults(Search report)
         {
@@ -90,15 +97,7 @@ namespace IncidentReportForm.Controllers
 
             return View("Search");
     }
-
-
-        //[HttpPost]
-        //public IActionResult Create(Reports report)
-        //{
-        //    _reportRepository.CreateReport(report);
-        //    return View(report);
-        //}
-
+    
         public IActionResult Details(int reportid)
         {
             var report = _reportRepository.GetReportById(reportid);
@@ -109,7 +108,6 @@ namespace IncidentReportForm.Controllers
 
             return View(report);
         }
-        //private IdentityUser GetCurrentUser() => _userManager.GetUserAsync(HttpContext.User);
         public IActionResult LineManager(int reportid)
         {
             Reports report = _reportRepository.GetReportById(reportid);
@@ -126,34 +124,13 @@ namespace IncidentReportForm.Controllers
             return View("Index");
         }
        
-        public JsonResult EmailValidator(string Email)
-        {
-            //if (email == "fintanroche1@gmail.com")
-            //{
-            return Json(true);
-            //}
-            //    else
-            //    {
-            //        return Json(true);
-            //    }
-            //return Json(false);
-        }
-
-
-
-
         [HttpPost]
         public IActionResult FormPage2(Reports report)
         {
 
             return View(report);
         }
-        //[HttpPost]
-        //public IActionResult Submit(Reports report)
-        //{
-        //    _reportRepository.CreateReport(report);
-        //    return View(report);
-        //}
+
         public IActionResult Submit()
         {
             return View();
@@ -173,11 +150,65 @@ namespace IncidentReportForm.Controllers
 
             return View(report);
         }
+        public IActionResult Email(int reportid)
+        {
+            Reports report = _reportRepository.GetReportById(reportid);
+            var displayVeiwModel = new DisplayViewModel
+            {
+                Report = report,
+                Principal = report.Principal
+            };
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            return View(report);
+        }
+        public IActionResult Print(int reportid)
+        {
+            Reports report = _reportRepository.GetReportById(reportid);
+            var displayVeiwModel = new DisplayViewModel
+            {
+                Report = report,
+                Principal = report.Principal
+            };
+            if (report == null)
+            {
+                return NotFound();
+            }
+
+            return View(report);
+        }
+        public IActionResult Download(Reports report)
+        {
+            HtmlToPdfConverter converter = new HtmlToPdfConverter();
+            WebKitConverterSettings settings = new WebKitConverterSettings();
+            settings.WebKitPath = Path.Combine(_hostingEnviroment.ContentRootPath, "QtBinariesWindows");
+            converter.ConverterSettings = settings;
+            String Id = (report.ReportId).ToString();
+            PdfDocument document = converter.Convert("https://localhost:44381/Report/Email?reportId=" + Id);
+            MemoryStream ms = new MemoryStream();
+
+            document.Save(ms);
+            document.Close(true);
+
+            ms.Position = 0;
+            FileStreamResult fileStreamResult = new FileStreamResult(ms, "application/pdf")
+            {
+                FileDownloadName = "Report.pdf"
+            };
+
+
+            return fileStreamResult;
+
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Submit(Reports report)
         {
+
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             if (!ModelState.IsValid)
             {
@@ -185,44 +216,60 @@ namespace IncidentReportForm.Controllers
             }
             else
             {
-            report.UserId = _userManager.GetUserId(User);
-            _reportRepository.CreateReport(report);
-            try
-            {
-                var message = new MimeMessage();
-                message.From.Add(new MailboxAddress("TeastA", report.Email));
-                message.To.Add(new MailboxAddress("TestB", report.Email));
-                message.Subject = "Incident Report";
-                message.Body = new TextPart("plain")
+                report.UserId = _userManager.GetUserId(User);
+                _reportRepository.CreateReport(report);
+
+
+                HtmlToPdfConverter converter = new HtmlToPdfConverter();
+                WebKitConverterSettings settings = new WebKitConverterSettings();
+                settings.WebKitPath = Path.Combine(_hostingEnviroment.ContentRootPath, "QtBinariesWindows");
+                converter.ConverterSettings = settings;
+                String Id = (report.ReportId).ToString();
+                PdfDocument document = converter.Convert("https://localhost:44381/Report/Email?reportId="+Id);
+                MemoryStream ms = new MemoryStream();
+                
+                document.Save(ms);
+                document.Close(true);
+                ms.Position = 0;
+               
+                try
                 {
-                    Text = Email.getEmail(report)
-                };
+                    var message = new MimeMessage();
+                    message.From.Add(new MailboxAddress("TeastA", report.Email));
+                    message.To.Add(new MailboxAddress("TestB", report.Email));
+                    message.Subject = "Incident Report";
+                    var builder = new BodyBuilder();
+                    builder.TextBody = "Test12";
+                    ContentType ct = new ContentType("application", "pdf");
+                    builder.Attachments.Add("Incident_Report.pdf", ms,ct);
 
-                using (var client = new MailKit.Net.Smtp.SmtpClient())
+                    message.Body = builder.ToMessageBody();
+
+                    using (var client = new MailKit.Net.Smtp.SmtpClient())
+                    {
+
+                        client.Connect("smtp.gmail.com", 587, false);
+
+                        //SMTP server authentication if needed
+                        client.Authenticate("fintanroche1@gmail.com", "@Time123");
+
+                        client.Send(message);
+
+                        client.Disconnect(true);
+                    }
+
+                }
+                catch (Exception ex)
                 {
-
-                    client.Connect("smtp.gmail.com", 587, false);
-
-                    //SMTP server authentication if needed
-                    client.Authenticate("fintanroche1@gmail.com", "@Time123");
-
-                    client.Send(message);
-
-                    client.Disconnect(true);
+                    Console.WriteLine(ex.Message);
+                    return StatusCode(500, "No Error occured");
                 }
 
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                return StatusCode(500, "No Error occured");
-            }
-
-            return View();
+                return View();
             }
         }
-            
-        }
 
-        
     }
+
+
+}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace IncidentReportForm.Models
 {
@@ -12,5 +13,6 @@ namespace IncidentReportForm.Models
         void CreateReport(Reports report);
         public void FinishReport(LineManager report);
         Reports GetReportById(int reportId);
+        public int GetPending(string _userManager);
     }
 }

@@ -35,26 +35,27 @@
                 @foreach (var line in Model.Reports)
                 {
                     //if (line.UserId == UserManager.GetUserId(User) && !line.Complete)
-                    if(line.Email == UserManager.GetUserName(User) && !line.Complete)
+                    if (line.Email == UserManager.GetUserName(User) && !line.Complete)
                     {
-                <tr>
-                    <partial name="_ReportTable" model="line" />
-                    <td>
-                        <a asp-controller="Report"
-                           asp-action="LineManager"
-                           asp-route-reportId="@line.ReportId">
-                            more
-                        </a>
-                    </td>
-                </tr>
+                        <tr>
+                            <partial name="_ReportTable" model="line" />
+                            <td>
+                                <a asp-controller="Report"
+                                   asp-action="LineManager"
+                                   asp-route-reportId="@line.ReportId">
+                                    more
+                                </a>
+                            </td>
+                        </tr>
                     }
 
 
                 }
             </table>
-      </div><br />
+        </div><br />
+        <h3 class="text-center"> Completed </h3>
         <table id="table12">
-            <h3 class="text-center"> Completed </h3>
+
             <tr>
                 <th>
                     Last Name
@@ -82,16 +83,16 @@
             {
                 if (line.Email == UserManager.GetUserName(User) && line.Complete)
                 {
-            <tr>
-                <partial name="_ReportTable" model="line" />
-                <td>
-                    <a asp-controller="Report"
-                       asp-action="FinalReport"
-                       asp-route-reportId="@line.ReportId">
-                        more
-                    </a>
-                </td>
-            </tr>
+                    <tr>
+                        <partial name="_ReportTable" model="line" />
+                        <td>
+                            <a asp-controller="Report"
+                               asp-action="FinalReport"
+                               asp-route-reportId="@line.ReportId">
+                                more
+                            </a>
+                        </td>
+                    </tr>
 
                 }
 

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using IncidentReportForm.Models;
 //using IncidentReportForm.ViewModels;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+
 
 namespace IncidentReportForm { 
     public class Startup
@@ -34,11 +36,14 @@ namespace IncidentReportForm {
             services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
             
             services.AddScoped<IReportRepository, ReportRepository>();
+            
 
         services.AddControllersWithViews();
+
             services.AddRazorPages();
 
-    }
+            
+        }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

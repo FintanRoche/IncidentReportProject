@@ -39,8 +39,9 @@
                             {
                                 <option asp-for="Model.Principal.SubjectType" value=@option>@option</option>
                             }
-                            <span asp-validation-for="Principal.SubjectType" class="text-danger"></span>
+
                         </select>
+                        <span asp-validation-for="Principal.SubjectType" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -199,7 +200,7 @@
                 </div>
             </div>
 
-
+        </div>
 
 
             <input asp-for="ReportId" type="hidden" />
@@ -213,6 +214,6 @@
 
 
     </form>
-    </div>
+   
 </body>
 

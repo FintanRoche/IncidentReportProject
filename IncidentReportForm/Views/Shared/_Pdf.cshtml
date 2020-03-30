@@ -1,0 +1,111 @@
+﻿@model Reports
+
+
+<header> <h1 class="text-center" style="padding-top:30px"> Incident Report</h1></header>
+<div class="container2">
+    <div><i>Injured Person Details</i></div><br />
+    <div id="indent">
+        
+        <div>
+            <p class="textRight"><b>Last Name: </b>@Model.Principal.LastName</p>
+        </div>
+        <div>
+                <p><b>First Name:</b> @Model.Principal.FirstName </p>
+        </div> 
+
+        <div>
+                <p><b>Date of birth: </b> @Model.Principal.DOB.ToString("dd/MM/yy")</p>
+        </div>
+        
+        <div>
+                <p><b> Next of Kin: </b>@Model.Principal.nextOfKin</p>
+        </div>
+        
+        <div class="col-md-3">
+                <p><b>Subject Type</b>@Model.Principal.SubjectType</p>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container2">
+    <div><i>Incident Details</i></div><br />
+    <div id="indent">
+        <div>
+                <p class="textRight"><b>Time: </b>@Model.Time.ToString("hh:mm")</p>
+        </div>
+
+        <div>
+                <p><b> Incident Date: </b>@Model.Date.ToString("dd/MM/yy")</p>
+        </div>
+
+        <div>
+                <p><b>Type: </b>@Model.IncidentType</p>
+        </div>
+
+        <div>
+                <p><b>Location: </b>@Model.IncidentLocation</p>
+        </div>
+ 
+        <div>
+                <p><b>Severity: </b>@Model.Serverity</p>
+        </div>
+ 
+
+        <div>
+                <p><b>Medical intervention</b>@Model.MedicalIntervention</p>
+        </div>
+
+        <div>
+                <p><b>Description: </b>@Model.IncidentDescription</p>
+        </div>
+    </div>
+</div>
+
+
+<div class="container2">
+    <div><i>Additional Witness</i></div><br />
+    <div id="indent">
+            <div >
+                <p class="textRight"><b>Last Name: </b>@Model.PresentLastName</p>
+            </div>
+            <div>
+                <p><b>First Name:</b>@Model.PresentFirstName</p>
+            </div>
+
+            <div>
+                <p><b>Phone: </b>@Model.PresentPhone</p>
+            </div>
+        
+    
+            <div>
+                <p><b>Description:</b></p>
+            </div>
+
+            <div>
+                <p>@Model.IncidentDescription</p>
+            </div>
+        
+
+    </div>
+</div>
+    <div class="container2">
+        <div>
+            <label><i>Line Manager</i></label>
+        </div>
+        <div id="indent">
+            
+            <div>
+                <p class="textRight"><b>Last Name: </b>@Model.LineManager.LastName</p>
+            </div>
+
+                <div>
+                    <p><b>First Name: </b>@Model.LineManager.FirstName</p>
+                </div>
+                
+                <div>
+                    <p><b>Email: </b>@Model.Email</p>
+                </div>
+            </div>
+        </div>

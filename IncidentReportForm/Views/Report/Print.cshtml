@@ -1,0 +1,8 @@
+﻿@model Reports
+@{
+    Layout = "_pdfLayout";
+}
+    <body style="background-color:white" onload="window.print()">
+        <partial name="_Pdf" model="Model" />
+        <meta http-equiv="Refresh" content="60; url=https://localhost:44381/Report/FinalReport?reportId=109" />
+    </body>

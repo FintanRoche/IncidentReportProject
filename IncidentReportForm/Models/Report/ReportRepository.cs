@@ -12,8 +12,7 @@ namespace IncidentReportForm.Models
     public class ReportRepository : IReportRepository
     {
         public ClaimsPrincipal User { get; set; }
-        private readonly UserManager<IdentityUser> _userManager;
-        SignInManager<IdentityUser> SignInManager;
+        
         private readonly AppDbContext _appDbContext;
         
         
@@ -57,12 +56,12 @@ namespace IncidentReportForm.Models
             Reports report=_appDbContext.Reports.Include(p=>p.Principal).Include(c=>c.LineManager).FirstOrDefault(r => r.ReportId == reportId);
             return report;
         }
-        public int GetPending()
+        public int GetPending(string _userManager)
         {
             int numPending = 0;
             foreach (Reports report in _appDbContext.Reports)
             {
-                if (report.UserId == _userManager.GetUserId(User) && !report.Complete)
+                if (report.UserId == _userManager && !report.Complete)
                 {
                     numPending++;
                 }
