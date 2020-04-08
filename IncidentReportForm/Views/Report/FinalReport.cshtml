@@ -6,8 +6,16 @@
        
         </div>
     <div class="float-md-right form-group row">
-        <div class="col-md-4"><button type="button" onclick="printDiv('printarea')"  value="print">Printtttt</button></div>
-        <div class="col-md-4"><button><a class="plain" asp-controller="Report" asp-action="Download" asp-route-reportId="@Model.ReportId" >Download</a></button></div>
+        <div class="col-md-4">
+            <button type="button" onclick="printDiv('printarea')"  value="print">Print</button>
+        </div>
+        <div class="col-md-4">
+            <button>
+                <a class="plain" asp-controller="Report" asp-action="Download" asp-route-reportId="@Model.ReportId" >Download</a>
+            </button>
+        </div>
 
     </div>
 </div>
+
+

@@ -23,9 +23,7 @@
                 </button>*@
                 @*<div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">*@
                 <ul>
-                    <li class="col-md-1">
-                        <p > </p>
-                    </li>
+                    
             @*<li class="nav-item">
             <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Checkout">Create</a>
         </li>
@@ -36,12 +34,7 @@
             <a class="nav-link text-white" asp-area="" asp-controller="Report" asp-action="Display">Display</a>
         </li>*@
 
-            @if (User.IsInRole("Manager") == true)
-            {
-                <li class="nav-item col-md-2">
-                    <a class="nav-link text-white" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                </li>
-            }
+           
             <partial name="_LoginPartial" />
         </ul>
                 </div>

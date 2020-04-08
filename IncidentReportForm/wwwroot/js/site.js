@@ -8,4 +8,4 @@
     window.print();
 
     document.body.innerHTML = originalContents;
-}
+    }

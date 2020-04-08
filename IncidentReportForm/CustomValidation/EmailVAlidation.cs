@@ -22,12 +22,10 @@ namespace IncidentReportForm.CustomValidation
                 String email = Convert.ToString(value);
                 if (email == user.Email)
                 {
-
                     return true;
                 }
             }
-            return false;
-            
+            return false;    
         }
     }
 }

@@ -28,15 +28,15 @@ namespace IncidentReportForm.Controllers
         private readonly IWebHostEnvironment _hostingEnviroment;
 
         private readonly IReportRepository _reportRepository;
-        public ReportController(IReportRepository reportRepository, UserManager<IdentityUser> userManager, IWebHostEnvironment hostingEnviroment)
+        public ReportController(IReportRepository reportRepository,
+        UserManager<IdentityUser> userManager, IWebHostEnvironment hostingEnviroment)
         {
             _userManager = userManager;
             _reportRepository = reportRepository;
             _hostingEnviroment = hostingEnviroment;
-
-        EmailVAlidation.userManager = userManager;
+            EmailVAlidation.userManager = userManager;
         }
-      
+        [Authorize]
         public IActionResult DisplayUser()
         {
             var displayViewModel = new DisplayViewModel
@@ -52,7 +52,7 @@ namespace IncidentReportForm.Controllers
         }
 
 
-        
+        [Authorize]
         public IActionResult Create()
         {
 
@@ -74,40 +74,27 @@ namespace IncidentReportForm.Controllers
             return View(displayViewModel);
 
         }
-       
+        [Authorize]
         public IActionResult Search()
         {
 
 
             return View();
         }
-       
+        [Authorize]
         [HttpPost]
         public IActionResult SearchResults(Search report)
         {
             if (report!=null)
             {
-                var displayViewModel = new DisplayViewModel
-                {
-                    Reports = _reportRepository.AllReports,
-                    Search = report
-            };
-            return View(displayViewModel);
-        }
-
-            return View("Search");
-    }
-    
-        public IActionResult Details(int reportid)
-        {
-            var report = _reportRepository.GetReportById(reportid);
-            if (report == null)
-            {
-                return NotFound();
+                List<Reports> searchResults = _reportRepository.Search(report);
+                return View(searchResults);
             }
 
-            return View(report);
+            return View("Search");
         }
+
+        [Authorize]
         public IActionResult LineManager(int reportid)
         {
             Reports report = _reportRepository.GetReportById(reportid);
@@ -118,9 +105,11 @@ namespace IncidentReportForm.Controllers
 
             return View(report);
         }
+
+        [Authorize]
         public IActionResult Line(LineManager report)
         {
-            _reportRepository.FinishReport(report);
+            _reportRepository.UpdateReport(report);
             return View("Index");
         }
        
@@ -182,28 +171,14 @@ namespace IncidentReportForm.Controllers
         }
         public IActionResult Download(Reports report)
         {
-            HtmlToPdfConverter converter = new HtmlToPdfConverter();
-            WebKitConverterSettings settings = new WebKitConverterSettings();
-            settings.WebKitPath = Path.Combine(_hostingEnviroment.ContentRootPath, "QtBinariesWindows");
-            converter.ConverterSettings = settings;
-            String Id = (report.ReportId).ToString();
-            PdfDocument document = converter.Convert("https://localhost:44381/Report/Email?reportId=" + Id);
-            MemoryStream ms = new MemoryStream();
-
-            document.Save(ms);
-            document.Close(true);
-
-            ms.Position = 0;
-            FileStreamResult fileStreamResult = new FileStreamResult(ms, "application/pdf")
-            {
-                FileDownloadName = "Report.pdf"
-            };
+            FileStreamResult fileStreamResult =_reportRepository.Download(report);
 
 
             return fileStreamResult;
 
         }
 
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Submit(Reports report)
@@ -262,7 +237,7 @@ namespace IncidentReportForm.Controllers
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return StatusCode(500, "No Error occured");
+                    return StatusCode(500, "Error occured");
                 }
 
                 return View();

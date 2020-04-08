@@ -128,7 +128,7 @@ public RegisterModel(
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
                         return LocalRedirect(returnUrl);
-                        //return LocalRedirect("Checkout");
+                        
                 }
             }
                 foreach (var error in result.Errors)

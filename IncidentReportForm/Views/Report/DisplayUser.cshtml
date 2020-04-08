@@ -34,7 +34,6 @@
 
                 @foreach (var line in Model.Reports)
                 {
-                    //if (line.UserId == UserManager.GetUserId(User) && !line.Complete)
                     if (line.Email == UserManager.GetUserName(User) && !line.Complete)
                     {
                         <tr>

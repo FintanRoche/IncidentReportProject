@@ -77,5 +77,6 @@ namespace IncidentReportForm {
             endpoints.MapRazorPages();
         });
     }
-}
+
+    }
 }
