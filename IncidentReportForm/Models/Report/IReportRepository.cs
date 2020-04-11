@@ -12,7 +12,7 @@ namespace IncidentReportForm.Models
         IEnumerable<Reports> AllReports { get; }
 
         void CreateReport(Reports report);
-        public void UpdateReport(LineManager report);
+        public void UpdateReport(Reports report);
         Reports GetReportById(int reportId);
         public int GetPending(string _userManager);
         public List<Reports> Search(Search search);

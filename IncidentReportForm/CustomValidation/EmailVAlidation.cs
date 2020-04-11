@@ -16,10 +16,13 @@ namespace IncidentReportForm.CustomValidation
         public static UserManager<IdentityUser> userManager { set; get; }
         public override bool IsValid(object value)
         {
+            //var rolesForUser = userManager.GetUsersInRoleAsync("Manager");
 
             foreach (IdentityUser user in userManager.Users)
             {
+                
                 String email = Convert.ToString(value);
+
                 if (email == user.Email)
                 {
                     return true;

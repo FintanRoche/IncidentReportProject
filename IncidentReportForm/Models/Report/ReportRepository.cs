@@ -36,24 +36,25 @@ namespace IncidentReportForm.Models
 
         public void CreateReport(Reports report)
         {
-
-            //order.OrderPlaced = DateTime.Now;
-
-
+            report.LineManager = new LineManager();
 
             _appDbContext.Reports.Add(report);
             _appDbContext.SaveChanges();
 
         }
-        public void UpdateReport(LineManager report)
+        public void RemoveReport(Reports report)
         {
-            Reports newReport = _appDbContext.Reports.FirstOrDefault(d => d.ReportId == report.ReportId);
-            newReport.LineManager = report;
-            newReport.Complete = true;
-            _appDbContext.Update(newReport);
+            _appDbContext.Reports.Remove(report);
             _appDbContext.SaveChanges();
         }
-        //public IEnumerable<Reports> Reports { get; set; }
+        public void UpdateReport(Reports report)
+        {
+            //Reports newReport = _appDbContext.Reports.FirstOrDefault(d => d.ReportId == report.ReportId);
+            //newReport.LineManager = report;
+            report.Complete = true;
+            _appDbContext.Update(report);
+            _appDbContext.SaveChanges();
+        }
 
         public IEnumerable<Reports> AllReports
         {
@@ -119,6 +120,7 @@ namespace IncidentReportForm.Models
             converter.ConverterSettings = settings;
             String Id = (report.ReportId).ToString();
             PdfDocument document = converter.Convert("https://localhost:44381/Report/Email?reportId=" + Id);
+            //PdfDocument document = converter.Convert("https://i.stack.imgur.com/xhzgN.png");
             MemoryStream ms = new MemoryStream();
             document.Save(ms);
             document.Close(true);

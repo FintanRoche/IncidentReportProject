@@ -107,10 +107,10 @@ namespace IncidentReportForm.Controllers
         }
 
         [Authorize]
-        public IActionResult Line(LineManager report)
+        public IActionResult Line(Reports report)
         {
             _reportRepository.UpdateReport(report);
-            return View("Index");
+            return RedirectToAction("DisplayUser");
         }
        
         [HttpPost]
@@ -185,12 +185,12 @@ namespace IncidentReportForm.Controllers
         {
 
             var errors = ModelState.Values.SelectMany(v => v.Errors);
-            if (!ModelState.IsValid)
-            {
-                return View("Create");
-            }
-            else
-            {
+            //if (!ModelState.IsValid)
+            //{
+            //    return View("Create");
+            //}
+            //else
+            //{
                 report.UserId = _userManager.GetUserId(User);
                 _reportRepository.CreateReport(report);
 
@@ -237,11 +237,11 @@ namespace IncidentReportForm.Controllers
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
-                    return StatusCode(500, "Error occured");
+                    return StatusCode(500, "Email Address was invailid");
                 }
 
                 return View();
-            }
+            //}
         }
 
     }
