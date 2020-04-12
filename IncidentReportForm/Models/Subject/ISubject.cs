@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace IncidentReportForm.Models
 {
-    public interface ISubject
+    public abstract class ISubject
     {
-        public string SubjectType { get; set; }
-       
         public String FirstName { get; set; }
         public string LastName { set; get; }
 

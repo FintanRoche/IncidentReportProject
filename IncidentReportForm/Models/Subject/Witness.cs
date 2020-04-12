@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace IncidentReportForm.Models
 {
-    public class Third 
-    {
-       
-        public string ThirdId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName{ get; set; }
+    public class Witness: ISubject 
+    { 
+       public int WitnessId { get; set; } 
+       public int Phone { get; set; } 
     }
 }

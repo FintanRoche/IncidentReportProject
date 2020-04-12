@@ -23,7 +23,7 @@ namespace UnitTests
         };
         Reports report2 = new Reports()
         {
-            Principal = new Principal
+            Subject = new Subject
             {
                 FirstName = "Report 2",
                 LastName = "Blogs"
@@ -32,7 +32,7 @@ namespace UnitTests
         };
         Reports report3 = new Reports()
         {
-            Principal = new Principal()
+            Subject = new Subject()
             {
                 FirstName = "Report 3",
                 LastName = "Blogs",
@@ -73,7 +73,7 @@ namespace UnitTests
                 Assert.AreEqual(2, context.Reports.Count());
                 service.RemoveReport(report);
                 Assert.AreEqual(1, context.Reports.Count());
-                Assert.AreEqual("Report 2", context.Reports.First().Principal.FirstName);
+                Assert.AreEqual("Report 2", context.Reports.First().Subject.FirstName);
 
 
         }
@@ -87,10 +87,10 @@ namespace UnitTests
                 AppDbContext context = new AppDbContext(options);
                 var service = new ReportRepository(context);
                 service.CreateReport(report2);
-                report2.Principal.FirstName = "ReportB";
+                report2.Subject.FirstName = "ReportB";
                 service.UpdateReport(report2);
                 
-                Assert.AreEqual("ReportB", context.Reports.First().Principal.FirstName);
+                Assert.AreEqual("ReportB", context.Reports.First().Subject.FirstName);
             Assert.AreEqual(true , context.Reports.First().Complete);
 
             
@@ -115,7 +115,7 @@ namespace UnitTests
                 List<Reports> Result3 = service.Search(search3);
 
                 Assert.AreEqual(1, Result1.Count());
-                Assert.AreEqual("Report 2", Result1.First().Principal.FirstName);
+                Assert.AreEqual("Report 2", Result1.First().Subject.FirstName);
 
                 Assert.AreEqual(2, Result2.Count());
 

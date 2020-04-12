@@ -34,7 +34,7 @@
 
                 @foreach (var line in Model.Reports)
                 {
-                    if (line.Email == UserManager.GetUserName(User) && !line.Complete)
+                    if (line.LineManager.Email == UserManager.GetUserName(User) && !line.Complete)
                     {
                         <tr>
                             <partial name="_ReportTable" model="line" />
@@ -80,7 +80,7 @@
             </tr>
             @foreach (var line in Model.Reports)
             {
-                if (line.Email == UserManager.GetUserName(User) && line.Complete)
+                if (line.LineManager.Email == UserManager.GetUserName(User) && line.Complete)
                 {
                     <tr>
                         <partial name="_ReportTable" model="line" />

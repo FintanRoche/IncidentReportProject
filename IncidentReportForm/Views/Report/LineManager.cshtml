@@ -8,31 +8,31 @@
             <div><i>Injured Person Details</i></div><br />
             <div id="indent">
                 <div class="form-group row">
-                    <label asp-for="Principal.FirstName" class="col-md-2 control-label"></label>
+                    <label asp-for="Subject.FirstName" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
-                        <input asp-for="Principal.FirstName" class="form-control" />
+                        <input asp-for="Subject.FirstName" class="form-control" />
                     </div>
-                    <label asp-for="Principal.LastName" class="col-md-2 control-label"></label>
+                    <label asp-for="Subject.LastName" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
-                        <input asp-for="Principal.LastName" class="form-control" />
-                    </div>
-                </div>
-
-                <div class="form-group row">
-                    <label asp-for="Principal.DOB" class="col-md-2 control-label"></label>
-                    <div class="col-md-3">
-                        <input asp-for="Principal.DOB" class="form-control" type="date" />
+                        <input asp-for="Subject.LastName" class="form-control" />
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    <label asp-for="Principal.nextOfKin" class="col-md-2 control-label"></label>
+                    <label asp-for="Subject.DOB" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
-                        <input asp-for="Principal.nextOfKin" class="form-control" />
+                        <input asp-for="Subject.DOB" class="form-control" type="date" />
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label asp-for="Subject.NextOfKin" class="col-md-2 control-label"></label>
+                    <div class="col-md-3">
+                        <input asp-for="Subject.NextOfKin" class="form-control" />
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label asp-for="Principal.SubjectType" class="col-md-2 control-label"></label>
+                    <label asp-for="Subject.SubjectType" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
                         <select class="form-control">
                             @foreach (string option in Options.ManagmentUnit)
@@ -41,7 +41,7 @@
                             }
 
                         </select>
-                        <span asp-validation-for="Principal.SubjectType" class="text-danger"></span>
+                        <span asp-validation-for="Subject.SubjectType" class="text-danger"></span>
                     </div>
                 </div>
             </div>
@@ -117,22 +117,22 @@
             </div>
             <br />
             <div class="form-group row">
-                <label asp-for="PresentFirstName" class="col-md-2 control-label"></label>
+                <label asp-for="Witness.FirstName" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
-                    <input asp-for="PresentFirstName" class="form-control" />
-                    <span asp-validation-for="PresentFirstName" class="text-danger"></span>
+                    <input asp-for="Witness.FirstName" class="form-control" />
+                    <span asp-validation-for="Witness.FirstName" class="text-danger"></span>
                 </div>
-                <label asp-for="PresentLastName" class="col-md-2 control-label"></label>
+                <label asp-for="Witness.LastName" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
-                    <input asp-for="PresentLastName" class="form-control" />
-                    <span asp-validation-for="PresentLastName" class="text-danger"></span>
+                    <input asp-for="Witness.LastName" class="form-control" />
+                    <span asp-validation-for="Witness.LastName" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
-                <label asp-for="PresentPhone" class="col-md-2 control-label"></label>
+                <label asp-for="Witness.Phone" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
-                    <input asp-for="PresentPhone" class="form-control" type="text" />
-                    <span asp-validation-for="PresentPhone" class="text-danger"></span>
+                    <input asp-for="Witness.Phone" class="form-control" type="text" />
+                    <span asp-validation-for="Witness.Phone" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group row">
@@ -162,10 +162,10 @@
                 </div>
             </div>
             <div class=" form-group row">
-                <label asp-for="Email" class="col-md-2 control-label"></label>
+                <label asp-for="LineManager.Email" class="col-md-2 control-label"></label>
                 <div class="col-md-3">
-                    <input asp-for="Email" class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
+                    <input asp-for="LineManager.Email" class="form-control" />
+                    <span asp-validation-for="LineManager.Email" class="text-danger"></span>
                 </div>
             </div>
 
@@ -175,28 +175,28 @@
 
 
             <div class="form-group row">
-                <label asp-for="LineManager.Notified" class="col-md-2 control-label"></label>
+                <label asp-for="Notified" class="col-md-2 control-label"></label>
                 <div class="col-md-5">
                     <select>
                         @foreach (string option in Options.ManagmentUnit)
                         {
-                            <option asp-for="LineManager.Notified" value=@option>@option</option>
+                            <option asp-for="Notified" value=@option>@option</option>
                         }
                     </select>
                 </div>
             </div>
 
             <div class=" form-group row">
-                <label asp-for="LineManager.Responses" class="col-md-2 control-label"></label>
+                <label asp-for="Responses" class="col-md-2 control-label"></label>
                 <div class="col-md-5">
-                    <input asp-for="LineManager.Responses" class="form-control" />
+                    <input asp-for="Responses" class="form-control" />
                 </div>
             </div>
 
             <div class=" form-group row">
-                <label asp-for="LineManager.Comment" class="col-md-2 control-label"></label>
+                <label asp-for="Comment" class="col-md-2 control-label"></label>
                 <div class="col-md-5">
-                    <input asp-for="LineManager.Comment" class="form-control" />
+                    <input asp-for="Comment" class="form-control" />
                 </div>
             </div>
 

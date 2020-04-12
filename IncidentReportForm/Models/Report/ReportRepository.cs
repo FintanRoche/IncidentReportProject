@@ -36,7 +36,7 @@ namespace IncidentReportForm.Models
 
         public void CreateReport(Reports report)
         {
-            report.LineManager = new LineManager();
+            //report.LineManager = new LineManager();
 
             _appDbContext.Reports.Add(report);
             _appDbContext.SaveChanges();
@@ -60,12 +60,12 @@ namespace IncidentReportForm.Models
         {
             get
             {
-                return _appDbContext.Reports.Include(c => c.Principal); ;
+                return _appDbContext.Reports.Include(c => c.Subject).Include(w => w.Witness).Include(l => l.LineManager); ;
             }
         }
         public Reports GetReportById(int reportId)
         {
-            Reports report = _appDbContext.Reports.Include(p => p.Principal).Include(c => c.LineManager).FirstOrDefault(r => r.ReportId == reportId);
+            Reports report = _appDbContext.Reports.Include(p => p.Subject).Include(c => c.LineManager).Include(w => w.Witness).FirstOrDefault(r => r.ReportId == reportId);
             return report;
         }
         public int GetPending(string _userManager)
@@ -87,15 +87,15 @@ namespace IncidentReportForm.Models
 
             foreach (var line in AllReports)
             {
-                if (line.Principal.FirstName == search.FirstName || search.FirstName == null)
+                if (line.Subject.FirstName == search.FirstName || search.FirstName == null)
                 {
-                    if (line.Principal.LastName == search.LastName || search.LastName == null)
+                    if (line.Subject.LastName == search.LastName || search.LastName == null)
                     {
 
-                        if (line.Date <= search.EndTime && line.Date >= search.StartTime)
-                        {
-                            if (search.EndTime.ToString("MM/dd/yyyy") == NullTime.ToString("MM/dd/yyyy"))
-                            {
+                        //if (line.Date <= search.EndTime && line.Date >= search.StartTime)
+                        //{
+                            //if (search.EndTime.ToString("MM/dd/yyyy") == NullTime.ToString("MM/dd/yyyy"))
+                            //{
                                 if (line.IncidentType == search.Type || search.Type == null)
                                 {
                                     if (line.IncidentLocation == search.Location || search.Location == null)
@@ -104,8 +104,8 @@ namespace IncidentReportForm.Models
                                     }
 
                                 }
-                            }
-                        }
+                            //}
+                        //}
                     }
                 }
             }

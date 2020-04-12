@@ -7,22 +7,22 @@
     <div id="indent">
         
         <div>
-            <p class="textRight"><b>Last Name: </b>@Model.Principal.LastName</p>
+            <p class="textRight"><b>Last Name: </b>@Model.Subject.LastName</p>
         </div>
         <div>
-                <p><b>First Name:</b> @Model.Principal.FirstName </p>
+                <p><b>First Name:</b> @Model.Subject.FirstName </p>
         </div> 
 
         <div>
-                <p><b>Date of birth: </b> @Model.Principal.DOB.ToString("dd/MM/yy")</p>
+                <p><b>Date of birth: </b> @Model.Subject.DOB.ToString("dd/MM/yy")</p>
         </div>
         
         <div>
-                <p><b> Next of Kin: </b>@Model.Principal.nextOfKin</p>
+                <p><b> Next of Kin: </b>@Model.Subject.NextOfKin</p>
         </div>
         
         <div class="col-md-3">
-                <p><b>Subject Type</b>@Model.Principal.SubjectType</p>
+                <p><b>Subject Type</b>@Model.Subject.SubjectType</p>
         </div>
 
     </div>
@@ -68,14 +68,14 @@
     <div><i>Additional Witness</i></div><br />
     <div id="indent">
             <div >
-                <p class="textRight"><b>Last Name: </b>@Model.PresentLastName</p>
+                <p class="textRight"><b>Last Name: </b>@Model.Witness.LastName</p>
             </div>
             <div>
-                <p><b>First Name:</b>@Model.PresentFirstName</p>
+                <p><b>First Name:</b>@Model.Witness.FirstName</p>
             </div>
 
             <div>
-                <p><b>Phone: </b>@Model.PresentPhone</p>
+                <p><b>Phone: </b>@Model.Witness.Phone</p>
             </div>
         
     
@@ -90,22 +90,32 @@
 
     </div>
 </div>
-    <div class="container2">
-        <div>
-            <label><i>Line Manager</i></label>
-        </div>
-        <div id="indent">
-            
-            <div>
-                <p class="textRight"><b>Last Name: </b>@Model.LineManager.LastName</p>
-            </div>
+<div class="container2">
+    <div>
+        <label><i>Line Manager</i></label>
+    </div>
+    <div id="indent">
 
-                <div>
-                    <p><b>First Name: </b>@Model.LineManager.FirstName</p>
-                </div>
-                
-                <div>
-                    <p><b>Email: </b>@Model.Email</p>
-                </div>
-            </div>
+        <div>
+            <p class="textRight"><b>Last Name: </b>@Model.LineManager.LastName</p>
         </div>
+
+        <div>
+            <p><b>First Name: </b>@Model.LineManager.FirstName</p>
+        </div>
+
+        <div>
+            <p><b>Email: </b>@Model.LineManager.Email</p>
+        </div>
+    
+    @if (Model.Complete == true)
+    {   
+        <div>
+            <p><b>Repsonse:</b>@Model.Responses</p>
+        </div>
+        <div>
+            <p><b>Description:</b>@Model.Comment</p>
+        </div>
+    }
+    </div>
+</div>

@@ -1,19 +1,19 @@
 ﻿@model Reports
 
         <td>
-                @Model.Principal.LastName
+                @Model.Subject.LastName
            
 
         </td>
         <td>
 
-                @Model.Principal.FirstName
+                @Model.Subject.FirstName
 
         </td>
         <td>
-         @if (!String.IsNullOrEmpty(@Model.Principal.nextOfKin))
+         @if (!String.IsNullOrEmpty(@Model.Subject.NextOfKin))
             {
-                @Model.Principal.nextOfKin}
+                @Model.Subject.NextOfKin}
             else
             {
 

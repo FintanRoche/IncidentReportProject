@@ -18,22 +18,23 @@ namespace IncidentReportForm.Models
         [Display(Name = "Incident Type:")]
         [Required(ErrorMessage = "Please choose an Icident type.")]
         public string IncidentType { get; set; }
-        public Principal Principal { get; set; }
+        public Subject Subject { get; set; }
         [Display(Name = "Description:")]
         public string IncidentDescription { get; set; }
         [Display(Name = "*Location:")]
         [Required(ErrorMessage = "Please enter Incident Loction")]
         public string IncidentLocation { get; set; }
-        public string PresentFirstName { get; set; }
-        public string PresentLastName { get; set; }
-        public int PresentPhone { get; set; }
+        public Witness Witness { get; set; }
+        //public string PresentFirstName { get; set; }
+        //public string PresentLastName { get; set; }
+        //public int PresentPhone { get; set; }
         public string MedicalIntervention { get; set; }
         public string Serverity { get; set; }
        
         [Required(ErrorMessage = "Please choose admission date.")]
         [Display(Name = "Email :")]
         [EmailVAlidation(ErrorMessage ="Invalid Email")]
-        public string Email { get; set; }
+        //public string Email { get; set; }
         public string UserId { get; set; }
         public bool Complete { get; set; }
         public LineManager LineManager { get; set; }
@@ -41,5 +42,8 @@ namespace IncidentReportForm.Models
         //[DateValidation(ErrorMessage="Please Enter a Valid Manager's Email Address")]
         public DateTime Date { get; set; }
         public DateTime Time { get; set; }
+        public string Notified { get; set; }
+        public string Responses { get; set; }
+        public string Comment { get; set; }
     }
 }

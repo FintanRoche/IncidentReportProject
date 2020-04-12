@@ -4,14 +4,16 @@ using IncidentReportForm.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace IncidentReportForm.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200411132515_modelChange1")]
+    partial class modelChange1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -26,8 +28,16 @@ namespace IncidentReportForm.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<bool>("Abuse")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Debriefing")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Email")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FirstName")
@@ -36,9 +46,45 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Notified")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ReportId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Responses")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("LineManagerId");
 
                     b.ToTable("LineManager");
+                });
+
+            modelBuilder.Entity("IncidentReportForm.Models.Principal", b =>
+                {
+                    b.Property<int>("PrincipalId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SubjectType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nextOfKin")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PrincipalId");
+
+                    b.ToTable("Principal");
                 });
 
             modelBuilder.Entity("IncidentReportForm.Models.Reports", b =>
@@ -48,14 +94,15 @@ namespace IncidentReportForm.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Comment")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("Complete")
                         .HasColumnType("bit");
 
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("IncidentDescription")
                         .HasColumnType("nvarchar(max)");
@@ -74,85 +121,34 @@ namespace IncidentReportForm.Migrations
                     b.Property<string>("MedicalIntervention")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Notified")
+                    b.Property<string>("PresentFirstName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Responses")
+                    b.Property<string>("PresentLastName")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PresentPhone")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PrincipalId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Serverity")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SubjectId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("WitnessId")
-                        .HasColumnType("int");
 
                     b.HasKey("ReportId");
 
                     b.HasIndex("LineManagerId");
 
-                    b.HasIndex("SubjectId");
-
-                    b.HasIndex("WitnessId");
+                    b.HasIndex("PrincipalId");
 
                     b.ToTable("Reports");
-                });
-
-            modelBuilder.Entity("IncidentReportForm.Models.Subject", b =>
-                {
-                    b.Property<int>("SubjectId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("DOB")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NextOfKin")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("SubjectType")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("SubjectId");
-
-                    b.ToTable("Subject");
-                });
-
-            modelBuilder.Entity("IncidentReportForm.Models.Witness", b =>
-                {
-                    b.Property<int>("WitnessId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Phone")
-                        .HasColumnType("int");
-
-                    b.HasKey("WitnessId");
-
-                    b.ToTable("Witness");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -361,13 +357,9 @@ namespace IncidentReportForm.Migrations
                         .WithMany()
                         .HasForeignKey("LineManagerId");
 
-                    b.HasOne("IncidentReportForm.Models.Subject", "Subject")
+                    b.HasOne("IncidentReportForm.Models.Principal", "Principal")
                         .WithMany()
-                        .HasForeignKey("SubjectId");
-
-                    b.HasOne("IncidentReportForm.Models.Witness", "Witness")
-                        .WithMany()
-                        .HasForeignKey("WitnessId");
+                        .HasForeignKey("PrincipalId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

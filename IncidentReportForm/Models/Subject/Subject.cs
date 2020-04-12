@@ -7,15 +7,13 @@ using System.Threading.Tasks;
 
 namespace IncidentReportForm.Models
 {
-    public class Principal : ISubject
+    public class Subject : ISubject
     {
         public string SubjectType { get; set; }
-        public  int PrincipalId { get; set; }
+        public  int SubjectId { get; set; }
        
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
         public DateTime DOB { get; set; }
-        public string nextOfKin { get; set; }
+        public string NextOfKin { get; set; }
 
         
     }

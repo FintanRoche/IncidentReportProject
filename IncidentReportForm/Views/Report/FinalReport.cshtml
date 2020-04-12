@@ -5,17 +5,17 @@
         <partial name="_Pdf" model="Model" />
        
         </div>
-    <div class="float-md-right form-group row">
-        <div class="col-md-4">
+    @*<div class="pull-right form-group row">*@
+        <div class=" pull-right">
             <button type="button" onclick="printDiv('printarea')"  value="print">Print</button>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 pull-right">
             <button>
                 <a class="plain" asp-controller="Report" asp-action="Download" asp-route-reportId="@Model.ReportId" >Download</a>
             </button>
         </div>
 
-    </div>
+    @*</div>*@
 </div>
 
 

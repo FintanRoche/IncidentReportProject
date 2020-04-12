@@ -130,7 +130,7 @@ namespace IncidentReportForm.Controllers
             Reports report = _reportRepository.GetReportById(reportid);
             var displayVeiwModel = new DisplayViewModel {
                     Report = report,
-                    Principal = report.Principal
+                    Principal = report.Subject
             };
             if (report == null)
             {
@@ -145,7 +145,7 @@ namespace IncidentReportForm.Controllers
             var displayVeiwModel = new DisplayViewModel
             {
                 Report = report,
-                Principal = report.Principal
+                Principal = report.Subject
             };
             if (report == null)
             {
@@ -160,7 +160,7 @@ namespace IncidentReportForm.Controllers
             var displayVeiwModel = new DisplayViewModel
             {
                 Report = report,
-                Principal = report.Principal
+                Principal = report.Subject
             };
             if (report == null)
             {
@@ -184,7 +184,7 @@ namespace IncidentReportForm.Controllers
         public IActionResult Submit(Reports report)
         {
 
-            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            //var errors = ModelState.Values.SelectMany(v => v.Errors);
             //if (!ModelState.IsValid)
             //{
             //    return View("Create");
@@ -210,8 +210,8 @@ namespace IncidentReportForm.Controllers
                 try
                 {
                     var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress("TeastA", report.Email));
-                    message.To.Add(new MailboxAddress("TestB", report.Email));
+                    message.From.Add(new MailboxAddress("TeastA", report.LineManager.Email));
+                    message.To.Add(new MailboxAddress("TestB", report.LineManager.Email));
                     message.Subject = "Incident Report";
                     var builder = new BodyBuilder();
                     builder.TextBody = "Test12";
