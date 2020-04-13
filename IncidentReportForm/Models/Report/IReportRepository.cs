@@ -17,5 +17,6 @@ namespace IncidentReportForm.Models
         public int GetPending(string _userManager);
         public List<Reports> Search(Search search);
         public FileStreamResult Download(Reports report);
+        public void Email(Reports report);
     }
 }

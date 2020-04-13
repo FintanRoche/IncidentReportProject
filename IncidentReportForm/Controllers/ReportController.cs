@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using IncidentReportForm.CustomValidation;
 using IncidentReportForm.Models;
 using IncidentReportForm.Models;
-//using IncidentReportForm.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -184,55 +183,19 @@ namespace IncidentReportForm.Controllers
         public IActionResult Submit(Reports report)
         {
 
-            //var errors = ModelState.Values.SelectMany(v => v.Errors);
-            //if (!ModelState.IsValid)
-            //{
-            //    return View("Create");
-            //}
-            //else
-            //{
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+            if (!ModelState.IsValid)
+            {
+                return View("Create");
+            }
+            else
+            {
                 report.UserId = _userManager.GetUserId(User);
                 _reportRepository.CreateReport(report);
-
-
-                HtmlToPdfConverter converter = new HtmlToPdfConverter();
-                WebKitConverterSettings settings = new WebKitConverterSettings();
-                settings.WebKitPath = Path.Combine(_hostingEnviroment.ContentRootPath, "QtBinariesWindows");
-                converter.ConverterSettings = settings;
-                String Id = (report.ReportId).ToString();
-                PdfDocument document = converter.Convert("https://localhost:44381/Report/Email?reportId="+Id);
-                MemoryStream ms = new MemoryStream();
-                
-                document.Save(ms);
-                document.Close(true);
-                ms.Position = 0;
-               
+        
                 try
                 {
-                    var message = new MimeMessage();
-                    message.From.Add(new MailboxAddress("TeastA", report.LineManager.Email));
-                    message.To.Add(new MailboxAddress("TestB", report.LineManager.Email));
-                    message.Subject = "Incident Report";
-                    var builder = new BodyBuilder();
-                    builder.TextBody = "Test12";
-                    ContentType ct = new ContentType("application", "pdf");
-                    builder.Attachments.Add("Incident_Report.pdf", ms,ct);
-
-                    message.Body = builder.ToMessageBody();
-
-                    using (var client = new MailKit.Net.Smtp.SmtpClient())
-                    {
-
-                        client.Connect("smtp.gmail.com", 587, false);
-
-                        //SMTP server authentication if needed
-                        client.Authenticate("fintanroche1@gmail.com", "@Time123");
-
-                        client.Send(message);
-
-                        client.Disconnect(true);
-                    }
-
+                    _reportRepository.Email(report);
                 }
                 catch (Exception ex)
                 {
@@ -241,7 +204,7 @@ namespace IncidentReportForm.Controllers
                 }
 
                 return View();
-            //}
+            }
         }
 
     }

@@ -15,7 +15,7 @@ namespace IncidentReportForm.Models
     {
         [Key]
         public int ReportId { get; set; }
-        [Display(Name = "Incident Type:")]
+        [Display(Name = "*Incident Type:")]
         [Required(ErrorMessage = "Please choose an Icident type.")]
         public string IncidentType { get; set; }
         public Subject Subject { get; set; }
@@ -25,25 +25,23 @@ namespace IncidentReportForm.Models
         [Required(ErrorMessage = "Please enter Incident Loction")]
         public string IncidentLocation { get; set; }
         public Witness Witness { get; set; }
-        //public string PresentFirstName { get; set; }
-        //public string PresentLastName { get; set; }
-        //public int PresentPhone { get; set; }
+        [Display(Name = "*Medical Intervention:")]
         public string MedicalIntervention { get; set; }
         public string Serverity { get; set; }
-       
-        [Required(ErrorMessage = "Please choose admission date.")]
-        [Display(Name = "Email :")]
-        [EmailVAlidation(ErrorMessage ="Invalid Email")]
-        //public string Email { get; set; }
         public string UserId { get; set; }
         public bool Complete { get; set; }
         public LineManager LineManager { get; set; }
-        [Display(Name="Date :")]
-        //[DateValidation(ErrorMessage="Please Enter a Valid Manager's Email Address")]
+        [Display(Name="*Date :")]
+        [DateValidation(ErrorMessage="Please enter valid date")]
         public DateTime Date { get; set; }
+        [Display(Name = "*Time :")]
+        [Required(ErrorMessage = "Please enter time")]
         public DateTime Time { get; set; }
+        [Display(Name ="Next of Kin Notified: ")]
         public string Notified { get; set; }
+        [Display(Name = "Responses given: ")]
         public string Responses { get; set; }
+        [Display(Name = "Comment: ")]
         public string Comment { get; set; }
     }
 }

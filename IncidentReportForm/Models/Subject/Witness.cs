@@ -9,6 +9,6 @@ namespace IncidentReportForm.Models
     public class Witness: ISubject 
     { 
        public int WitnessId { get; set; } 
-       public int Phone { get; set; } 
+       public string Phone { get; set; } 
     }
 }

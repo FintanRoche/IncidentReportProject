@@ -8,7 +8,9 @@ namespace IncidentReportForm.Models
 {
     public abstract class ISubject
     {
+        [Display(Name = "First Name: ")]
         public String FirstName { get; set; }
+        [Display(Name = "Last Name: ")]
         public string LastName { set; get; }
 
     }

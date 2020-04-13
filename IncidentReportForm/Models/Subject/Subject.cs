@@ -9,10 +9,12 @@ namespace IncidentReportForm.Models
 {
     public class Subject : ISubject
     {
+        [Display(Name = "Subject Type: ")]
         public string SubjectType { get; set; }
         public  int SubjectId { get; set; }
-       
+        [Display(Name = "D.O.B: ")]
         public DateTime DOB { get; set; }
+        [Display(Name = "Next of Kin: ")]
         public string NextOfKin { get; set; }
 
         
