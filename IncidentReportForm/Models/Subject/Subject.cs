@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace IncidentReportForm.Models
 {
-    public class Subject : ISubject
+    public class Subject : IPerson
     {
         [Display(Name = "Subject Type: ")]
         public string SubjectType { get; set; }

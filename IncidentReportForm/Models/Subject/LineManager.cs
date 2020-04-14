@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace IncidentReportForm.Models
 {
-    public class LineManager: ISubject
+    public class LineManager: IPerson
     {
         [Key]
         public int LineManagerId { get; set;}

@@ -36,7 +36,7 @@
                     <label asp-for="Subject.SubjectType" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
                         <select class="form-control">
-                            @foreach (string option in Options.ManagmentUnit)
+                            @foreach (string option in Options.SubjectType)
                             {
                                 <option asp-for="Model.Principal.SubjectType" value=@option>@option</option>
                             }

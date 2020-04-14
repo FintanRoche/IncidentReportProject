@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace IncidentReportForm.Models
 {
-    public abstract class ISubject
+    public abstract class IPerson
     {
         [Display(Name = "First Name: ")]
         public String FirstName { get; set; }
