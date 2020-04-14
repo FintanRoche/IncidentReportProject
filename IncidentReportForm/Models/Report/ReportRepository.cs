@@ -93,23 +93,21 @@ namespace IncidentReportForm.Models
                     if (line.Subject.LastName == search.LastName || search.LastName == null)
                     {
 
-                        //if (line.Date <= search.EndTime && line.Date >= search.StartTime)
-                        //{
-                            //if (search.EndTime.ToString("MM/dd/yyyy") == NullTime.ToString("MM/dd/yyyy"))
-                            //{
-                                if (line.IncidentType == search.Type || search.Type == null)
+                        if (line.Date <= search.EndTime && line.Date >= search.StartTime || search.EndTime.ToString("MM/dd/yyyy") == NullTime.ToString("MM/dd/yyyy"))
+                        {
+                            if (line.IncidentType == search.Type || search.Type == null)
+                            {
+                                if (line.IncidentLocation == search.Location || search.Location == null)
                                 {
-                                    if (line.IncidentLocation == search.Location || search.Location == null)
-                                    {
-                                        searchResults.Add(line);
-                                    }
-
+                                    searchResults.Add(line);
                                 }
-                            //}
-                        //}
+
+                            }
+                        }
                     }
                 }
             }
+        
             return searchResults;
         }
 

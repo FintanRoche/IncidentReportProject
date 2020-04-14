@@ -35,7 +35,7 @@ namespace IncidentReportForm.Controllers
             _hostingEnviroment = hostingEnviroment;
             EmailVAlidation.userManager = userManager;
         }
-        [Authorize]
+        [Authorize(Roles ="Manager")]
         public IActionResult DisplayUser()
         {
             var displayViewModel = new DisplayViewModel
@@ -61,8 +61,8 @@ namespace IncidentReportForm.Controllers
         }
 
 
-
-            public IActionResult Display()
+        [Authorize]
+        public IActionResult Display()
         {
             var displayViewModel = new DisplayViewModel
             {
@@ -93,7 +93,7 @@ namespace IncidentReportForm.Controllers
             return View("Search");
         }
 
-        [Authorize]
+        [Authorize(Roles = "Manager")]
         public IActionResult LineManager(int reportid)
         {
             Reports report = _reportRepository.GetReportById(reportid);
@@ -111,19 +111,19 @@ namespace IncidentReportForm.Controllers
             _reportRepository.UpdateReport(report);
             return RedirectToAction("DisplayUser");
         }
-       
+        [Authorize]
         [HttpPost]
         public IActionResult FormPage2(Reports report)
         {
 
             return View(report);
         }
-
+        [Authorize]
         public IActionResult Submit()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult FinalReport(int reportid)
         {
             Reports report = _reportRepository.GetReportById(reportid);
@@ -153,6 +153,7 @@ namespace IncidentReportForm.Controllers
 
             return View(report);
         }
+        [Authorize]
         public IActionResult Print(int reportid)
         {
             Reports report = _reportRepository.GetReportById(reportid);
@@ -168,6 +169,7 @@ namespace IncidentReportForm.Controllers
 
             return View(report);
         }
+        [Authorize]
         public IActionResult Download(Reports report)
         {
             FileStreamResult fileStreamResult =_reportRepository.Download(report);
@@ -177,7 +179,7 @@ namespace IncidentReportForm.Controllers
 
         }
 
-        [Authorize]
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Submit(Reports report)
