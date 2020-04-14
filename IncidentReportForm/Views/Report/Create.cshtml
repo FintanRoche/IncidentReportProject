@@ -35,10 +35,10 @@
                 <div class="form-group row">
                     <label asp-for="Subject.SubjectType" class="col-md-2 control-label"></label>
                     <div class="col-md-3">
-                        <select class="form-control">
+                        <select asp-for="Subject.SubjectType" class="form-control">
                             @foreach (string option in Options.SubjectType)
                             {
-                                <option asp-for="Model.Principal.SubjectType" value=@option>@option</option>
+                                <option  value=@option>@option</option>
                             }
 
                         </select>

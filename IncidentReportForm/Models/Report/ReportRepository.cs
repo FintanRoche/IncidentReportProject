@@ -21,6 +21,7 @@ namespace IncidentReportForm.Models
 
         private readonly AppDbContext _appDbContext;
         private readonly IWebHostEnvironment _hostingEnviroment;
+        
 
         public ReportRepository(AppDbContext appDbContext)
         {
@@ -31,6 +32,7 @@ namespace IncidentReportForm.Models
         {
             _appDbContext = appDbContext;
             _hostingEnviroment = hostEnvironment;
+            
         }
 
 
@@ -149,7 +151,7 @@ namespace IncidentReportForm.Models
                 message.To.Add(new MailboxAddress("TestB", report.LineManager.Email));
                 message.Subject = "Incident Report";
                 var builder = new BodyBuilder();
-                builder.TextBody = "Test12";
+                builder.TextBody = "A incident report has been submitted" ;
                 ContentType ct = new ContentType("application", "pdf");
                 builder.Attachments.Add("Incident_Report.pdf", ms, ct);
 

@@ -14,7 +14,7 @@ namespace IncidentReportForm.Models
     {
         [Key]
         public int LineManagerId { get; set;}
-        [Required(ErrorMessage = "Please choose admission date.")]
+        [Required(ErrorMessage = "Enter an email address.")]
         [Display(Name = "Email :")]
         [EmailVAlidation(ErrorMessage = "Invalid Email")]
         public string Email { get; set; }
