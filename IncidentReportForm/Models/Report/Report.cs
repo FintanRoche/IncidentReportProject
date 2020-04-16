@@ -25,13 +25,16 @@ namespace IncidentReportForm.Models
         [Required(ErrorMessage = "Please enter Incident Loction")]
         public string IncidentLocation { get; set; }
         public Witness Witness { get; set; }
+        [Required(ErrorMessage = "please check a box")]
         [Display(Name = "*Medical Intervention:")]
         public string MedicalIntervention { get; set; }
+        [Display(Name = "Serverity:")]
         public string Serverity { get; set; }
         public string UserId { get; set; }
         public bool Complete { get; set; }
         public LineManager LineManager { get; set; }
         [Display(Name="*Date :")]
+        [Required(ErrorMessage = "Please enter date")]
         [DateValidation(ErrorMessage="Please enter valid date")]
         public DateTime Date { get; set; }
         [Display(Name = "*Time :")]

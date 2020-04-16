@@ -16,7 +16,7 @@ namespace IncidentReportForm.CustomValidation
         public static UserManager<IdentityUser> userManager { set; get; }
         public override bool IsValid(object value)
         {
-            //var rolesForUser = userManager.GetUsersInRoleAsync("Manager");
+            
 
             foreach (IdentityUser user in userManager.Users)
             {

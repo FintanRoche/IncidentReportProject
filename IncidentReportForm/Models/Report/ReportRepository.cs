@@ -39,7 +39,7 @@ namespace IncidentReportForm.Models
 
         public void CreateReport(Reports report)
         {
-            //report.LineManager = new LineManager();
+            
 
             _appDbContext.Reports.Add(report);
             _appDbContext.SaveChanges();

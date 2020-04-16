@@ -8,7 +8,8 @@ namespace IncidentReportForm.Models
 {
     public class Witness: IPerson 
     { 
-       public int WitnessId { get; set; } 
-       public string Phone { get; set; } 
+       public int WitnessId { get; set; }
+        [Display(Name = "Phone: ")]
+        public string Phone { get; set; } 
     }
 }

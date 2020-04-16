@@ -15,7 +15,7 @@ namespace IncidentReportForm.Models
         [Key]
         public int LineManagerId { get; set;}
         [Required(ErrorMessage = "Enter an email address.")]
-        [Display(Name = "Email :")]
+        [Display(Name = "*Email :")]
         [EmailVAlidation(ErrorMessage = "Invalid Email")]
         public string Email { get; set; }
         //public int ReportId { get; set; }
