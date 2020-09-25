@@ -163,7 +163,7 @@ namespace IncidentReportForm.Models
                     client.Connect("smtp.gmail.com", 587, false);
 
                     //SMTP server authentication if needed
-                    client.Authenticate("fintanroche1@gmail.com", "@Time123");
+                    client.Authenticate("*****@gmail.com", "*******");
 
                     client.Send(message);
 
